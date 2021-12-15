@@ -17,58 +17,43 @@ let UserSchema = new mongoose.Schema(
 			unique: true,
 			sparse: true,
 		},
-		category: { type: [String], default: null },
-		nameChinese: {
+
+		firstName: {
 			type: String,
 			required: true,
 			minLength: 3,
 			default: null,
 			trim: true,
 		},
-		nameEng: {
+		lastName: {
 			type: String,
 			required: true,
 			minLength: 3,
 			default: null,
 			trim: true,
 		},
-		age: { type: Number, required: true, min: 0, max: 150 },
-		gender: {
+
+		jobDescription: {
+			type: String,
+			default: null,
+		},
+		workingDuration: {
 			type: Number,
-			required: true,
+			default: 0,
 			enum: [
-				1, // 1: male
-				2, // 2: female
-				3, // 3: Not Sure
+				1, // 1: 1-3 months
+				2, // 2: 3-6 months
+				3, // 3: 6-9 months
+				4, // 4: 9-12 months
+				5, // 5: above 12 months
 			],
 		},
-		phone: {
-			type: Number,
-			required: true,
-			default: null,
-			minLength: 8,
-		},
-		profilePic: { type: Array, required: true },
-		backgroundPic: { type: String, default: null },
 
-		area: { type: String, trim: true },
-		price: { type: Number, default: null },
-
-		expertise: {
-			type: String,
-			required: true,
-			default: null,
-		},
-		experience: {
-			type: String,
-			default: null,
-			required: true,
-		},
-		fbLink: { type: String, trim: true },
-		instaLink: { type: String, trim: true },
-		youtubeLink: { type: String, trim: true },
-		intro: { type: String, trim: true },
-		interested: { type: String, trim: true },
+		noOfStayDays: { type: Number, default: 0 },
+		allocatedBed: { type: mongoose.Schema.Types.ObjectId, ref: "Bed" },
+		gym: { type: Boolean, default: false },
+		meals: { type: Number, default: 0 },
+		clothes: { type: Array, default: null },
 
 		isEmailVerified: { type: Boolean, default: false },
 		otp: { type: String, default: null },
@@ -78,11 +63,11 @@ let UserSchema = new mongoose.Schema(
 
 		role: {
 			type: Number,
-			default: 1, // default 1- User
+			default: 3, // default 1- User
 			enum: [
 				1, // 1: Admin
-				2, // 2: Tutor
-				3, // 3: Student
+				2, // 2: Staff
+				3, // 3: Customer
 			],
 		},
 
@@ -94,6 +79,7 @@ let UserSchema = new mongoose.Schema(
 				2, //Blocked
 			],
 		},
+
 		hash: String,
 		salt: String,
 	},
@@ -147,20 +133,20 @@ UserSchema.methods.generateJWT = function () {
 		{ expiresIn: "60d" }
 	);
 };
+
 UserSchema.methods.toJSON = function () {
 	return {
 		user: {
 			email: this.email,
-			category: this.category,
-			nameEng: this.nameEng,
-			nameChinese: this.nameChinese,
-			age: this.age,
-			gender: this.gender,
-			phone: this.phone,
-			profilePic: this.profilePic,
-			backgroundPic: this.backgroundPic,
-			tutor: this.tutor,
-			student: this.student,
+			firstName: this.firstName,
+			lastName: this.lastName,
+			jobDescription: this.jobDescription,
+			workingDuration: this.workingDuration,
+			noOfStayDays: this.noOfStayDays,
+			allocatedBed: this.allocatedBed,
+			gym: this.gym,
+			meals: this.meals,
+			clothes: this.clothes,
 		},
 	};
 };
