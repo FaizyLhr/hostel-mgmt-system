@@ -2,7 +2,7 @@ const faker = require("faker");
 const User = require("../models/User");
 
 async function seedUser() {
-	// Tutor Seeder
+	// Staff Seeder
 	for (let i = 0; i < 20; i++) {
 		let newUser = new User();
 

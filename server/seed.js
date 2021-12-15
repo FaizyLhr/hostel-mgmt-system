@@ -22,7 +22,7 @@ mongoose
 
 const defaultUser = require("./seeder/defaultUser");
 const user = require("./seeder/user");
-// const staff = require("./seeder/defaultUser");
+const staff = require("./seeder/staff");
 // const customer = require("./seeder/defaultUser");
 const bed = require("./seeder/bed");
 
