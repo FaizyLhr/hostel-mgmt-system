@@ -3,9 +3,13 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 
 const BedSchema = new mongoose.Schema(
 	{
-		beds: { type: Array, default: null },
-		isAllocated: { type: Boolean, default: false },
-		allocatedTo: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+		bedNum: { type: Number, default: 0 },
+		isFree: { type: Boolean, default: true },
+		allocatedTo: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			default: null,
+		},
 	},
 	{ timestamps: true }
 );
