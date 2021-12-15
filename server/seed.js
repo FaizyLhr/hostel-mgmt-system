@@ -21,9 +21,8 @@ mongoose
 	});
 
 const defaultUser = require("./seeder/defaultUser");
-const user = require("./seeder/user");
 const staff = require("./seeder/staff");
-// const customer = require("./seeder/defaultUser");
+const customer = require("./seeder/customer");
 const bed = require("./seeder/bed");
 
 async function init() {
@@ -31,9 +30,8 @@ async function init() {
 	await mongoose.connection.db.dropDatabase();
 
 	await defaultUser();
-	// await user();
-	// await staff();
-	// await customer();
+	await staff();
+	await customer();
 	await bed();
 
 	exit();

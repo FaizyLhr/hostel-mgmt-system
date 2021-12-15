@@ -53,10 +53,32 @@ let UserSchema = new mongoose.Schema(
 
 		// Customer
 		noOfStayDays: { type: Number, default: 0 },
-		allocatedBed: { type: mongoose.Schema.Types.ObjectId, ref: "Bed" },
+		allocatedBed: { type: Number, default: 0 },
 		gym: { type: Boolean, default: false },
-		meals: { type: Number, default: 0 },
-		clothes: { type: Array, default: null },
+		meal: {
+			type: Number,
+			default: 0,
+			enum: [
+				0, // 0: nill
+				1, // 1:
+				2, // 2:
+				3, // 3:
+				4, // 4:
+				5, // 5:
+			],
+		},
+		clothe: {
+			type: Number,
+			default: 0,
+			enum: [
+				0, // 0: nill
+				1, // 1:
+				2, // 2:
+				3, // 3:
+				4, // 4:
+				5, // 5:
+			],
+		},
 
 		isEmailVerified: { type: Boolean, default: false },
 		otp: { type: String, default: null },
@@ -74,13 +96,9 @@ let UserSchema = new mongoose.Schema(
 			],
 		},
 
-		status: {
-			type: Number,
-			default: 1,
-			enum: [
-				1, //Active
-				2, //Blocked
-			],
+		isBlock: {
+			type: Boolean,
+			default: false,
 		},
 
 		hash: String,
