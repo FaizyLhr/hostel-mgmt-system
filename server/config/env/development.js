@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
 	PORT: 3000,
-	MONGODB_URI: "mongodb://localhost:27017/ALLSPORTS?retryWrites=false",
+	MONGODB_URI: "mongodb://localhost:27017/HMS?retryWrites=false",
 	secret: "secret",
 	host: "localhost:3000",
 	smtpAuth: {
