@@ -20,4 +20,4 @@ const beds = [
 	{ isFree: true, allocatedTo: null, bedNum: 19 },
 	{ isFree: true, allocatedTo: null, bedNum: 20 },
 ];
-module.exports = beds;
+module.exports = { beds };
