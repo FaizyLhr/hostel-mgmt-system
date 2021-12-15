@@ -21,22 +21,18 @@ mongoose
 	});
 
 const defaultUser = require("./seeder/defaultUser");
-const categorie = require("./seeder/categorie");
-const user = require("./seeder/user");
-const course = require("./seeder/course");
-const toll = require("./seeder/toll");
-const seedApp = require("./seeder/application");
+// const staff = require("./seeder/defaultUser");
+// const customer = require("./seeder/defaultUser");
+// const bed = require("./seeder/defaultUser");
 
 async function init() {
 	console.log("dropping DB");
 	await mongoose.connection.db.dropDatabase();
 
 	await defaultUser();
-	await categorie();
-	await user();
-	await course();
-	await toll();
-	await seedApp();
+	// await staff();
+	// await customer();
+	// await bed();
 
 	exit();
 }

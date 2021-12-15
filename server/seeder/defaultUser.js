@@ -4,84 +4,54 @@ async function seedUser() {
 	// Seed Admin
 	{
 		let newUser = new User();
+		newUser.role = 1;
 
 		newUser.email = "admin@gmail.com";
-		newUser.role = 1;
-		newUser.nameChinese = "admin";
-		newUser.nameEng = "admin";
-		newUser.phone = "123466789865";
-		newUser.age = 23;
-		newUser.gender = 1;
-		newUser.profilePic = "admin.png";
-		newUser.backgroundPic = "adminBg.png";
+		newUser.firstName = "admin";
+		newUser.lastName = "admin";
 
 		newUser.setPassword("faizy");
 
 		newUser.isEmailVerified = true;
-
-		newUser.tutor.expertise = "null";
-		newUser.tutor.experience = "null";
 
 		// console.log(newUser);
 		// console.log("Admin Seeded");
 
 		await newUser.save();
 	}
-	// Seed Tutor
+	// Seed Staff
 	{
 		let newUser = new User();
+		newUser.role = 2;
 
-		newUser.email = "tutor@gmail.com";
-		newUser.category = ["Yoga"];
-		newUser.nameChinese = "tutor";
-		newUser.nameEng = "tutor";
-		newUser.phone = "12345789965";
-		newUser.age = 12;
-		newUser.gender = 1;
-		newUser.profilePic = "tutor.png";
-		newUser.backgroundPic = "tutorBg.png";
+		newUser.email = "staff@gmail.com";
+		newUser.firstName = "staff";
+		newUser.lastName = "staff";
+		newUser.jobDescription = "Developer";
+		newUser.workingDuration = 2;
 
 		newUser.setPassword("faizy");
 
 		newUser.isEmailVerified = true;
-
-		newUser.role = 2;
-		newUser.tutor.expertise = "dance";
-		newUser.tutor.experience = "Over 100 peoples";
-		newUser.tutor.fbLink = "link";
-		newUser.tutor.instaLink = "link";
-		newUser.tutor.youtubeLink = "link";
 
 		// console.log(newUser);
 		// console.log("Tutor Seeded");
 
 		await newUser.save();
 	}
-	// Seed Student
+	// Seed Customer
 	{
 		let newUser = new User();
+		newUser.role = 3;
 
-		newUser.email = "student@gmail.com";
-		newUser.category = "yoga";
-		newUser.nameChinese = "student";
-		newUser.nameEng = "student";
-		newUser.phone = "41234546648468";
-		newUser.age = 12;
-		newUser.gender = 2;
-		newUser.profilePic = "student.png";
-		newUser.backgroundPic = "studentBg.png";
+		newUser.email = "customer@gmail.com";
+		newUser.firstName = "customer";
+		newUser.lastName = "customer";
+		newUser.noOfStayDays = 2;
 
 		newUser.setPassword("faizy");
 
 		newUser.isEmailVerified = true;
-
-		newUser.role = 3;
-
-		newUser.tutor.expertise = "null";
-		newUser.tutor.experience = "null";
-
-		newUser.student.intro = "Kean to learn";
-		newUser.student.interested = "Exercise";
 
 		// console.log(newUser);
 		// console.log("Student Seeded");

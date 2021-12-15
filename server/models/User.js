@@ -33,6 +33,7 @@ let UserSchema = new mongoose.Schema(
 			trim: true,
 		},
 
+		// Staff
 		jobDescription: {
 			type: String,
 			default: null,
@@ -41,6 +42,7 @@ let UserSchema = new mongoose.Schema(
 			type: Number,
 			default: 0,
 			enum: [
+				0, // 0: nill
 				1, // 1: 1-3 months
 				2, // 2: 3-6 months
 				3, // 3: 6-9 months
@@ -49,6 +51,7 @@ let UserSchema = new mongoose.Schema(
 			],
 		},
 
+		// Customer
 		noOfStayDays: { type: Number, default: 0 },
 		allocatedBed: { type: mongoose.Schema.Types.ObjectId, ref: "Bed" },
 		gym: { type: Boolean, default: false },
