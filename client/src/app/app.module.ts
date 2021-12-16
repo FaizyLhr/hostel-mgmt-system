@@ -7,13 +7,15 @@ import { SigninComponent } from './MyComponents/signin/signin.component';
 import { HomeComponent } from './MyComponents/home/home.component';
 import { SignUpComponent } from './MyComponents/sign-up/sign-up.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './MyComponents/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
     HomeComponent,
-    SignUpComponent
+    SignUpComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
