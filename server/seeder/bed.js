@@ -12,9 +12,9 @@ async function seedBeds() {
 
 	for (let i = 0; i < 20; i++) {
 		let newBed = new Bed();
-		newBed.isFree = faker.datatype.boolean();
+		newBed.isFree = true;
 		newBed.bedNum = i + 1;
-		newBed.allocatedTo = getUser._id;
+		// newBed.allocatedTo = getUser._id;
 		await newBed.save();
 	}
 

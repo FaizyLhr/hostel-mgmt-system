@@ -53,6 +53,14 @@ function isStudent(req, res, next) {
 	next();
 }
 
+function isBedFree(req, res, next) {
+	// console.log(req.user.status);
+	if (req.bed.isFree === true) {
+		return next(new ForbiddenResponse("Bed Already Free"));
+	}
+	next();
+}
+
 function isBlocked(req, res, next) {
 	// console.log(req.user.status);
 	if (req.emailUser.status === 2) {
@@ -211,4 +219,5 @@ module.exports = {
 	isPosted,
 	isAuthentic,
 	isRead,
+	isBedFree
 };
