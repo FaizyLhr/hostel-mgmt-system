@@ -39,7 +39,7 @@ router.put(
 	isAdmin,
 	isBedFree,
 	async (req, res, next) => {
-		console.log(req.user);
+		// console.log(req.user);
 		req.bed.isFree = true;
 
 		req.bed.save((err, result) => {
