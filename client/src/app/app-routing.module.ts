@@ -4,7 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-
+  {
+    path:"",
+    loadChildren: () => import('./features/admin/admin.module').then((m) => m.AdminModule)
+  }
 ];
 
 @NgModule({

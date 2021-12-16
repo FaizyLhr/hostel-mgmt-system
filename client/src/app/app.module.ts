@@ -8,11 +8,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './features/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

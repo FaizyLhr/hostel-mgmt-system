@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { LayoutComponent } from './layouts/layout.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,7 +14,8 @@ import { LayoutComponent } from './layouts/layout.component';
     LayoutComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class CoreModule { }
