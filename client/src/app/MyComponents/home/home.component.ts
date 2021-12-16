@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   content?: string;
 
-  constructor() {}
+  constructor(private userService: UserService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.getPublicContent().subscribe(
+      (data) => {
+        this.content = data;
+      },
+      (err) => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
+  }
 }
