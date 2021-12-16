@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './MyComponents/signin/signin.component';
 import { HomeComponent } from './MyComponents/home/home.component';
 import { SignUpComponent } from './MyComponents/sign-up/sign-up.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SignUpComponent } from './MyComponents/sign-up/sign-up.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
