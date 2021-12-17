@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path:"",
     loadChildren: () => import('./features/admin/admin.module').then((m) => m.AdminModule)
+  },
+  {
+    path:"home",
+    loadChildren: () => import('./features/home/home.module').then((m) => m.HomeModule)
   }
 ];
 
