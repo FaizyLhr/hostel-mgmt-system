@@ -11,8 +11,6 @@ let {
 const UserModel = require("../../models/User");
 const BedModel = require("../../models/Bed");
 
-const getToken = require("../../utilities/getToken");
-
 const {
 	isAdmin,
 	isUnBlocked,
@@ -139,14 +137,20 @@ router.post(
 	passport.authenticate("local", {
 		session: false
 	}),
-	getToken,
 	(req, res, next) => {
-		// console.log("Login");
-		// console.log("User", req.user);
-		// console.log("Token", req.user.token);
+		if (!user) {
+			next(new BadRequestResponse("No User Found"));
+		}
+		if (req.user.isBlock === true || req.user.isEmailVerified === false) {
+			return next(
+				new UnauthorizedResponse(
+					"Your Account is Blocked! OR Not Verified!, Contact to Support please ",
+					401.1
+				)
+			);
+		}
 
-		next(new OkResponse(req.user.toAuthJSON()));
-		return;
+		return next(new OkResponse(req.user.toAuthJSON()));;
 	}
 );
 
