@@ -138,7 +138,7 @@ router.post(
 		session: false
 	}),
 	(req, res, next) => {
-		if (!user) {
+		if (!req.user) {
 			next(new BadRequestResponse("No User Found"));
 		}
 		if (req.user.isBlock === true || req.user.isEmailVerified === false) {

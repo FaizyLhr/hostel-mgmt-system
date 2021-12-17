@@ -201,6 +201,7 @@ UserSchema.methods.toAuthJSON = function () {
 		email: this.email,
 		firstName: this.firstName,
 		lastName: this.lastName,
+		role: this.role,
 		jobDescription: this.jobDescription,
 		workingDuration: this.workingDuration,
 		noOfStayDays: this.noOfStayDays,
