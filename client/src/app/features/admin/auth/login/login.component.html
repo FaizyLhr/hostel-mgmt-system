@@ -1,32 +1,50 @@
-
 <div class="container">
-    <h3>login works!</h3>
-    <form id="form-login" class="p-t-15" role="form" [formGroup]="loginForm">
-          <!-- START Form Control-->
-          <div class="form-group form-group-default">
-            <label>Login</label>
-            <div class="controls">
-              <input type="text" name="email" placeholder="Email" class="form-control" required formControlName="email">
-            </div>
-          </div>
-          <!-- END Form Control-->
-          <!-- START Form Control-->
-          <div class="form-group form-group-default">
-            <label>Password</label>
-            <div class="controls">
-              <input type="password" class="form-control" name="password" placeholder="Credentials" required formControlName="password">
-            </div>
-          </div>
-          <!-- START Form Control-->
-          <div class="row">
-            <div class="col-md-6 d-flex align-items-center justify-content-end">
-              <button aria-label="" class="btn btn-primary btn-lg " type="submit" [disabled] = "loginForm.invalid" (click) = "onSubmit()" >Sign in</button>
-            </div>
-          </div>
-          
-          <!-- END Form Control-->
-        </form>
+  <h3>login works!</h3>
+  <form id="form-login" class="p-t-15" role="form" [formGroup]="loginForm">
+    <!-- START Form Control-->
+    <div class="form-group form-group-default">
+      <label>Login</label>
+      <div class="controls">
+        <input
+          type="text"
+          name="email"
+          placeholder="Email"
+          class="form-control"
+          required
+          formControlName="email"
+        />
+      </div>
+    </div>
+    <!-- END Form Control-->
+    <!-- START Form Control-->
+    <div class="form-group form-group-default">
+      <label>Password</label>
+      <div class="controls">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Credentials"
+          required
+          formControlName="password"
+        />
+      </div>
+    </div>
+    <!-- START Form Control-->
+    <div class="row">
+      <div class="col-md-6 d-flex align-items-center justify-content-end">
+        <button
+          aria-label=""
+          class="btn btn-primary btn-lg"
+          type="submit"
+          [disabled]="loginForm.invalid"
+          (click)="onSubmit()"
+        >
+          Sign in
+        </button>
+      </div>
+    </div>
+
+    <!-- END Form Control-->
+  </form>
 </div>
-
-
-  

@@ -1,1 +1,131 @@
-<p>add works!</p>
+<div class="container">
+  <p>add works!</p>
+  <form id="form-addCustomer" role="form" [formGroup]="addCustomerForm">
+    <!-- START Form Control-->
+    <h1 class="text-center">Add Customers Form</h1>
+
+    <div class="form-group form-group-default">
+      <div class="controls">
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          class="form-control"
+          required
+          formControlName="email"
+        />
+      </div>
+    </div>
+
+    <div class="form-group form-group-default">
+      <div class="controls">
+        <label>First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          class="form-control"
+          required
+          formControlName="firstName"
+        />
+      </div>
+    </div>
+
+    <div class="form-group form-group-default">
+      <div class="controls">
+        <label>last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          placeholder="last Name"
+          class="form-control"
+          required
+          formControlName="lastName"
+        />
+      </div>
+    </div>
+
+    <div class="form-group form-group-default">
+      <label>Job Description</label>
+      <div class="controls">
+        <input
+          type="text"
+          class="form-control"
+          name="jobDescription"
+          placeholder="Job Description"
+          formControlName="jobDescription"
+        />
+      </div>
+    </div>
+
+    <div class="form-group form-group-default">
+      <label>Working Duration</label>
+      <div class="controls">
+        <select
+          id="inputState"
+          formControlName="workingDuration"
+          name="workingDuration"
+          class="form-control"
+        >
+          <option selected>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group form-group-default">
+      <label>No. Of Days for Stay</label>
+      <div class="controls">
+        <select
+          id="inputState"
+          formControlName="noOfStayDays"
+          name="noOfStayDays"
+          class="form-control"
+        >
+          <option selected>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group form-group-default">
+      <label>allocatedBedNum</label>
+      <div class="controls">
+        <input
+          type="number"
+          class="form-control"
+          name="allocatedBedNum"
+          placeholder="allocatedBedNum"
+          required
+          formControlName="allocatedBedNum"
+        />
+      </div>
+    </div>
+
+    <!-- START Form Control-->
+    <div class="row">
+      <div class="col-md-6 d-flex align-items-center justify-content-end">
+        <button
+          aria-label=""
+          class="btn btn-primary btn-lg"
+          type="submit"
+          [disabled]="addCustomerForm.invalid"
+          (click)="onSubmit()"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+
+    <!-- END Form Control-->
+  </form>
+</div>
