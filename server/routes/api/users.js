@@ -197,7 +197,6 @@ router.get("/all", isToken, isAdmin, (req, res, next) => {
 			return;
 		}
 		// console.log(result);
-		result.docs = result.docs.map((user) => user.toJSON());
 		// console.log(":::Result:::::", result);
 		// console.log(":::Result Docs:::::", result.docs);
 		next(new OkResponse({
