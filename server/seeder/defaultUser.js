@@ -10,7 +10,7 @@ async function seedUser() {
 		newUser.firstName = "admin";
 		newUser.lastName = "admin";
 
-		newUser.setPassword("faizy");
+		newUser.setPassword("1234");
 
 		newUser.isEmailVerified = true;
 
@@ -30,7 +30,7 @@ async function seedUser() {
 		newUser.jobDescription = "Developer";
 		newUser.workingDuration = 2;
 
-		newUser.setPassword("faizy");
+		newUser.setPassword("1234");
 
 		newUser.isEmailVerified = true;
 
