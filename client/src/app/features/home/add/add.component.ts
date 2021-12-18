@@ -10,6 +10,7 @@ import { BedsService, UserService } from 'src/app/core/services';
 export class AddComponent implements OnInit {
   addCustomerForm!: FormGroup;
   beds: any;
+  role: string = 'customer';
 
   constructor(
     private usersService: UserService,
@@ -22,14 +23,26 @@ export class AddComponent implements OnInit {
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      jobDescription: ['', Validators.required],
-      workingDuration: [0, Validators.required],
-      noOfStayDays: [0, Validators.required],
-      allocatedBedNum: ['', Validators.required],
+      role: ['customer', Validators.required],
+      jobDescription: '',
+      workingDuration: 0,
+      noOfStayDays: 0,
+      allocatedBedNum: '',
     });
+
+    this.addCustomerForm.get('role')?.valueChanges.subscribe((x) => {
+      // console.log(x);
+      this.role = x;
+    });
+
+    // console.log(this.addCustomerForm.controls);
+    // this.addCustomerForm.valueChanges.subscribe((x) => {
+    //   console.log(x);
+    //   console.log('Validation', x.invalid);
+    //   console.log('Error', x.error);
+    // });
   }
 
-  // this.bedsService.getBeds().subscribe(
   //     res => {
   //       this.beds = res.data.result;
   //       console.log(this.beds);

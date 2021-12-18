@@ -11,7 +11,7 @@ import { HttpTokenInterceptor } from './interceptors';
   declarations: [HeaderComponent, FooterComponent, LayoutComponent],
   imports: [CommonModule, SharedModule],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
   ],
 })
 export class CoreModule {}

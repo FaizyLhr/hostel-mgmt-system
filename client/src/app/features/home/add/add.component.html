@@ -46,107 +46,89 @@
       </div>
     </div>
 
-    <!-- <div>
-      <h2>Angular Show/Hide Div on Radio Button Click</h2>
-
+    <div>
       <label>
-        <input
-          [value]="1"
-          [(ngModel)]="sh"
-          name="sh"
-          type="radio"
-          [checked]="isChecked"
-        />
-        Adams
+        <input type="radio" value="customer" formControlName="role" />
+        <span>Customer</span>
       </label>
-
       <label>
-        <input
-          [value]="0"
-          [(ngModel)]="sh"
-          name="sh"
-          type="radio"
-          [checked]="!isChecked"
-        />
-        Johnas
+        <input type="radio" value="staff" formControlName="role" />
+        <span>Staff</span>
       </label>
+    </div>
+    <h1>{{ role }}</h1>
 
-      <div class="text-center purple" *ngIf="sh == 1">Adams</div>
-      <div class="text-center red" *ngIf="sh == 0">Johnas</div>
-    </div> -->
+    <div *ngIf="role === 'staff'; then staffBlock; else customerBlock"></div>
 
-    <!-- <div *ngIf="condition; then thenBlock; else elseBlock"></div>
-    <ng-template #thenBlock
-      >Content to render when condition is true.</ng-template
+    <ng-template #staffBlock>
+      <div class="form-group form-group-default">
+        <label>Job Description</label>
+        <div class="controls">
+          <input
+            type="text"
+            required
+            class="form-control"
+            name="jobDescription"
+            placeholder="Job Description"
+            formControlName="jobDescription"
+          />
+        </div>
+      </div>
+
+      <div class="form-group form-group-default">
+        <label>Working Duration</label>
+        <div class="controls">
+          <select
+            id="inputState"
+            formControlName="workingDuration"
+            name="workingDuration"
+            class="form-control"
+          >
+            <option selected>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div></ng-template
     >
-    <ng-template #elseBlock
-      >Content to render when condition is false.</ng-template
-    > -->
 
-    <div class="form-group form-group-default">
-      <label>Job Description</label>
-      <div class="controls">
-        <input
-          type="text"
-          class="form-control"
-          name="jobDescription"
-          placeholder="Job Description"
-          formControlName="jobDescription"
-        />
+    <ng-template #customerBlock
+      ><div class="form-group form-group-default">
+        <label>No. Of Days for Stay</label>
+        <div class="controls">
+          <select
+            id="inputState"
+            required
+            formControlName="noOfStayDays"
+            name="noOfStayDays"
+            class="form-control"
+          >
+            <option selected>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group form-group-default">
-      <label>Working Duration</label>
-      <div class="controls">
-        <select
-          id="inputState"
-          formControlName="workingDuration"
-          name="workingDuration"
-          class="form-control"
-        >
-          <option selected>0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group form-group-default">
-      <label>No. Of Days for Stay</label>
-      <div class="controls">
-        <select
-          id="inputState"
-          formControlName="noOfStayDays"
-          name="noOfStayDays"
-          class="form-control"
-        >
-          <option selected>0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group form-group-default">
-      <label>allocatedBedNum</label>
-      <div class="controls">
-        <input
-          type="number"
-          class="form-control"
-          name="allocatedBedNum"
-          placeholder="allocatedBedNum"
-          required
-          formControlName="allocatedBedNum"
-        />
-      </div>
-    </div>
+      <div class="form-group form-group-default">
+        <label>allocatedBedNum</label>
+        <div class="controls">
+          <input
+            required
+            type="number"
+            class="form-control"
+            name="allocatedBedNum"
+            placeholder="allocatedBedNum"
+            formControlName="allocatedBedNum"
+          />
+        </div></div
+    ></ng-template>
 
     <!-- START Form Control-->
     <div class="row">
@@ -155,9 +137,9 @@
           aria-label=""
           class="btn btn-primary btn-lg"
           type="submit"
-          [disabled]="addCustomerForm.invalid"
           (click)="onSubmit()"
         >
+          <!-- [disabled]="addCustomerForm.invalid" -->
           Add
         </button>
       </div>

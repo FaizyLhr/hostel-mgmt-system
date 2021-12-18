@@ -12,6 +12,6 @@ export class AppComponent {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    // this.userService.populate();
+    this.userService.populate();
   }
 }
