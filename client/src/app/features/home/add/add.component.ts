@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BedsService } from 'src/app/core/services';
+import { BedsService, UserService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-add',
@@ -12,6 +12,7 @@ export class AddComponent implements OnInit {
   beds: any;
 
   constructor(
+    private usersService: UserService,
     private bedsService: BedsService,
     private formBuilder: FormBuilder
   ) {}
@@ -28,7 +29,7 @@ export class AddComponent implements OnInit {
     });
   }
 
-  // this.bedsService.getNews().subscribe(
+  // this.bedsService.getBeds().subscribe(
   //     res => {
   //       this.beds = res.data.result;
   //       console.log(this.beds);
@@ -36,8 +37,11 @@ export class AddComponent implements OnInit {
   //   );
 
   onSubmit(): void {
-    this.bedsService.postNews(this.addCustomerForm.value).subscribe((data) => {
-      this.addCustomerForm.reset();
-    });
+    this.usersService
+      .postUsers(this.addCustomerForm.value)
+      .subscribe((data) => {
+        console.log(data);
+        this.addCustomerForm.reset();
+      });
   }
 }

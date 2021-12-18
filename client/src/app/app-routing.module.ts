@@ -1,17 +1,33 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-
+import { LayoutComponent } from './core/layouts/layout.component';
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   redirectTo: 'login',
+  //   pathMatch: 'full',
+  //   // component: LayoutComponent,
+  // },
   {
-    path:"",
-    loadChildren: () => import('./features/admin/admin.module').then((m) => m.AdminModule)
+    path: '',
+    component: LayoutComponent,
   },
   {
-    path:"home",
-    loadChildren: () => import('./features/home/home.module').then((m) => m.HomeModule)
-  }
+    path: '',
+    loadChildren: () =>
+      import('./features/admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./features/home/home.module').then((m) => m.HomeModule),
+  },
+  // {
+  //   path: '**',
+  //   redirectTo: '/login',
+  //   pathMatch: 'full',
+  // },
 ];
 
 @NgModule({

@@ -2,17 +2,16 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '.';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BedsService {
+  constructor(private apiService: ApiService) {}
 
-  constructor(private apiService: ApiService) { }
-
-  getNews() {
+  getBeds() {
     return this.apiService.get('/news/all');
   }
 
-  postNews(data: any){
-    return this.apiService.post('/news/addNews', {news: data});
+  postBeds(data: any) {
+    return this.apiService.post('/beds/add', { news: data });
   }
 }

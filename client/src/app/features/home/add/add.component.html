@@ -46,6 +46,43 @@
       </div>
     </div>
 
+    <!-- <div>
+      <h2>Angular Show/Hide Div on Radio Button Click</h2>
+
+      <label>
+        <input
+          [value]="1"
+          [(ngModel)]="sh"
+          name="sh"
+          type="radio"
+          [checked]="isChecked"
+        />
+        Adams
+      </label>
+
+      <label>
+        <input
+          [value]="0"
+          [(ngModel)]="sh"
+          name="sh"
+          type="radio"
+          [checked]="!isChecked"
+        />
+        Johnas
+      </label>
+
+      <div class="text-center purple" *ngIf="sh == 1">Adams</div>
+      <div class="text-center red" *ngIf="sh == 0">Johnas</div>
+    </div> -->
+
+    <!-- <div *ngIf="condition; then thenBlock; else elseBlock"></div>
+    <ng-template #thenBlock
+      >Content to render when condition is true.</ng-template
+    >
+    <ng-template #elseBlock
+      >Content to render when condition is false.</ng-template
+    > -->
+
     <div class="form-group form-group-default">
       <label>Job Description</label>
       <div class="controls">
