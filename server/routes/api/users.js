@@ -65,13 +65,13 @@ router.post("/add", isToken, isAdmin, (req, res, next) => {
 	}
 
 	if (
-		(req.body.user.allocatedBedNum || req.body.user.noOfStayDays) && (req.body.user.workingDuration || req.body.user.jobDescription)
+		(+req.body.user.allocatedBedNum !== 0 || req.body.user.noOfStayDays) && (+req.body.user.workingDuration !== 0 || req.body.user.jobDescription)
 	) {
 		return next(new BadRequestResponse("You Can't a customer and Staff at a time"));
-	} else if (req.body.user.allocatedBedNum || req.body.user.noOfStayDays) {
+	} else if (+req.body.user.allocatedBedNum !== 0 || req.body.user.noOfStayDays) {
 		console.log("3");
 		req.role = 3;
-	} else if (req.body.user.workingDuration || req.body.user.jobDescription) {
+	} else if (+req.body.user.workingDuration !== 0 || req.body.user.jobDescription) {
 		console.log("2");
 		req.role = 2;
 	}
