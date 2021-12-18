@@ -47,7 +47,7 @@ export class UserService {
   }
 
   setAuth(user: any) {
-    // Save JWT sent from server in localstorage
+    // Save JWT sent from server in localStorage
     this.jwtService.save(user.token);
     // Set current user data into observable
     this.currentUserSubject.next(user);
@@ -56,7 +56,7 @@ export class UserService {
   }
 
   purgeAuth() {
-    // Remove JWT from localstorage
+    // Remove JWT from localStorage
     this.jwtService.destroy();
     // Set current user to an empty object
     this.currentUserSubject.next({} as any);
