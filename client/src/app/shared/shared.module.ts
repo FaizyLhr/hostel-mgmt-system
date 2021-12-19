@@ -5,8 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
@@ -17,12 +15,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     RouterModule,
   ],
-  exports:[
+  exports: [
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
-  ]
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

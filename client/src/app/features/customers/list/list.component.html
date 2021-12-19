@@ -14,9 +14,10 @@
         <td>{{ user?.firstName }}</td>
         <td>{{ user?.lastName }}</td>
         <td>{{ user?.email }}</td>
-        <!-- <td>
-          <a (click)="changeStatus(i)"><i class="fas fa-lock"></i></a>
-        </td> -->
+        <td>
+          <a class="btn btn-info" routerLink="/home/report">View Report</a>
+          <!-- <a (click)="changeStatus(i)"><i class="fas fa-lock"></i></a> -->
+        </td>
       </tr>
     </tbody>
   </table>

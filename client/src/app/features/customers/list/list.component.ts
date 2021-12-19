@@ -22,4 +22,12 @@ export class ListComponent implements OnInit {
       // console.log(this.allUsers);
     });
   }
+
+  changeStatus(index: number) {
+    this.userService
+      .changeStatus(this.allUsers[index].user.email)
+      .subscribe((data) => {
+        this.getAllUsers();
+      });
+  }
 }
