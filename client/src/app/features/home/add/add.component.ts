@@ -34,13 +34,6 @@ export class AddComponent implements OnInit {
       // console.log(x);
       this.role = x;
     });
-
-    // console.log(this.addCustomerForm.controls);
-    // this.addCustomerForm.valueChanges.subscribe((x) => {
-    //   console.log(x);
-    //   console.log('Validation', x.invalid);
-    //   console.log('Error', x.error);
-    // });
   }
 
   //     res => {

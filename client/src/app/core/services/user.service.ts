@@ -88,9 +88,18 @@ export class UserService {
   }
 
   postUsers(data: any) {
-    console.log(data);
+    // console.log(data);
 
     return this.apiService.post('/users/add', { user: data });
+  }
+
+  addServices(data: any, email: string): Observable<any> {
+    console.log(data);
+    console.log(email);
+
+    return this.apiService.put('/users/addServices/' + email, {
+      user: data,
+    });
   }
 
   getCurrentUser(): any {
