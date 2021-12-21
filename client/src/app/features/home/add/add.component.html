@@ -80,9 +80,9 @@
           aria-label=""
           class="btn btn-primary btn-lg"
           type="submit"
+          [disabled]="addCustomerForm.invalid"
           (click)="onSubmit()"
         >
-          <!-- [disabled]="addCustomerForm.invalid" -->
           Add
         </button>
       </div>

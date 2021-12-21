@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-staff.component.css'],
 })
 export class AddStaffComponent implements OnInit {
-  addCustomerForm!: FormGroup;
+  addStaffForm!: FormGroup;
   beds: any;
 
   constructor(
@@ -22,16 +22,15 @@ export class AddStaffComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.addCustomerForm = this.formBuilder.group({
+    this.addStaffForm = this.formBuilder.group({
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      role: ['customer', Validators.required],
-      noOfStayDays: 0,
-      allocatedBedNum: '',
+      workingDuration: 0,
+      jobDescription: '',
     });
 
-    // this.addCustomerForm.get('role')?.valueChanges.subscribe((x) => {
+    // this.addStaffForm.get('role')?.valueChanges.subscribe((x) => {
     //   // console.log(x);
     //   this.role = x;
     // });
@@ -57,9 +56,9 @@ export class AddStaffComponent implements OnInit {
   ];
 
   onSubmit(): void {
-    console.log(this.addCustomerForm);
+    console.log(this.addStaffForm);
 
-    this.usersService.postUsers(this.addCustomerForm.value).subscribe(
+    this.usersService.postUsers(this.addStaffForm.value).subscribe(
       (data) => {
         console.log(data);
         Swal.fire({
@@ -69,7 +68,7 @@ export class AddStaffComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.addCustomerForm.reset();
+        this.addStaffForm.reset();
         this.router.navigate(['/home']);
       },
       (err) => {

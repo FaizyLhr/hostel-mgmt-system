@@ -1,6 +1,6 @@
 <div class="container">
   <p>add-staff works!</p>
-  <form id="form-addCustomer" role="form" [formGroup]="addCustomerForm">
+  <form id="form-addCustomer" role="form" [formGroup]="addStaffForm">
     <!-- START Form Control-->
     <h1 class="text-center">Add Customers Form</h1>
 
@@ -80,9 +80,9 @@
           aria-label=""
           class="btn btn-primary btn-lg"
           type="submit"
+          [disabled]="addStaffForm.invalid"
           (click)="onSubmit()"
         >
-          <!-- [disabled]="addCustomerForm.invalid" -->
           Add
         </button>
       </div>
