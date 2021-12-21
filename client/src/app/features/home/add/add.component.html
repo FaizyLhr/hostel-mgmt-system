@@ -56,7 +56,7 @@
         <span>Staff</span>
       </label>
     </div>
-    <h1>{{ role }}</h1>
+    <!-- <h1>{{ role }}</h1> -->
 
     <div *ngIf="role === 'staff'; then staffBlock; else customerBlock"></div>
 
@@ -78,41 +78,27 @@
       <div class="form-group form-group-default">
         <label>Working Duration</label>
         <div class="controls">
-          <select
-            id="inputState"
+          <ng-select
+            [items]="workingDurationOptions"
+            bindLabel="title"
+            bindValue="value"
             formControlName="workingDuration"
-            name="workingDuration"
-            class="form-control"
           >
-            <option selected>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-      </div></ng-template
-    >
+          </ng-select>
+        </div></div
+    ></ng-template>
 
     <ng-template #customerBlock
       ><div class="form-group form-group-default">
         <label>No. Of Days for Stay</label>
         <div class="controls">
-          <select
-            id="inputState"
-            required
+          <ng-select
+            [items]="noOfStayDaysOptions"
+            bindLabel="title"
+            bindValue="value"
             formControlName="noOfStayDays"
-            name="noOfStayDays"
-            class="form-control"
           >
-            <option selected>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+          </ng-select>
         </div>
       </div>
 

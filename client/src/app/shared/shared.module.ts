@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { NgSelectModule } from '@ng-select/ng-select';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -14,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule,
+    NgSelectModule,
   ],
   exports: [
     NgbModule,
@@ -21,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
+    NgSelectModule,
   ],
 })
 export class SharedModule {}

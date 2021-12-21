@@ -115,7 +115,7 @@ export class UserService {
 
   // Update the user on the server (email, pass, etc)
   update(user: any): Observable<any> {
-    console.log('USer::::::', user);
+    // console.log('USer::::::', user);
 
     return this.apiService.put('/user', { user }).pipe(
       map((data) => {

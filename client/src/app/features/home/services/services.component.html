@@ -8,49 +8,38 @@
     <div class="form-group form-group-default">
       <label>Clothe</label>
       <div class="controls">
-        <select
-          id="inputState"
+        <ng-select
+          [items]="mealOptions"
+          bindLabel="title"
+          bindValue="value"
           formControlName="clothe"
-          name="clothe"
-          class="form-control"
         >
-          <option selected>0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+        </ng-select>
       </div>
     </div>
 
     <div class="form-group form-group-default">
       <label>Meal</label>
       <div class="controls">
-        <select
-          id="inputState"
+        <ng-select
+          [items]="clotheOptions"
+          bindLabel="title"
+          bindValue="value"
           formControlName="meal"
-          name="meal"
-          class="form-control"
         >
-          <option selected>0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+        </ng-select>
       </div>
     </div>
 
     <div>
       <label>
+        <b>Add Gym:</b>
         <input type="radio" value="false" formControlName="gym" />
-        <span>False</span>
+        <span>No</span>
       </label>
       <label>
         <input type="radio" value="true" formControlName="gym" />
-        <span>True</span>
+        <span>Yes</span>
       </label>
     </div>
     <!-- <h1>{{ gym }}</h1> -->

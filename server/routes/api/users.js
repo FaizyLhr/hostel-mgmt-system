@@ -97,6 +97,7 @@ router.post("/add", isToken, isAdmin, (req, res, next) => {
 	// console.log(newUser);
 	if (req.role === 3) {
 		// for Customer
+		console.log(req.body);
 		if (req.body.user.noOfStayDays) {
 			newUser.noOfStayDays = req.body.user.noOfStayDays;
 		}
@@ -104,10 +105,25 @@ router.post("/add", isToken, isAdmin, (req, res, next) => {
 			BedModel.findOne({
 				bedNum: req.body.user.allocatedBedNum
 			}).then((bed) => {
-				console.log("Bed::::", bed);
+				if (bed.isFree === false) {
+					return next(new BadRequestResponse("Bed Already Reserved"));
+				}
+				// console.log("Bed::::", bed);
 				bed.isFree = false;
 				bed.allocatedTo = newUser._id;
 				newUser.allocatedBedNum = bed.bedNum;
+
+				// console.log(newUser);
+				newUser.save((err, result) => {
+					if (err) {
+						// console.log(err);
+						return next(new BadRequestResponse(err));
+					} else {
+						// console.log(result);
+						return next(new OkResponse(result));
+					}
+				});
+
 				bed.save((err, result) => {
 					if (err) return next(new BadRequestResponse(err));
 					console.log("Status Changed");
@@ -119,16 +135,7 @@ router.post("/add", isToken, isAdmin, (req, res, next) => {
 		}
 	}
 
-	// console.log(newUser);
-	newUser.save((err, result) => {
-		if (err) {
-			// console.log(err);
-			return next(new BadRequestResponse(err));
-		} else {
-			// console.log(result);
-			return next(new OkResponse(result));
-		}
-	});
+
 });
 
 // Login
@@ -190,25 +197,35 @@ router.get("/all", isToken, isAdmin, (req, res, next) => {
 
 	let query = {};
 	// query.role = 1;
-
-	UserModel.paginate(query, options, function (err, result) {
-		if (err) {
-			// console.log(err);
-			next(new BadRequestResponse("Server Error"), 500);
-			return;
-		}
-		// console.log(result);
-		// console.log(":::Result:::::", result);
-		// console.log(":::Result Docs:::::", result.docs);
+	UserModel.find().then((result) => {
+		console.log(result)
 		next(new OkResponse({
-			result: result.docs
+			result: result
 		}));
 		return;
 	}).catch((e) => {
-		console.log(e);
-		next(new BadRequestResponse(e.error));
-		return;
-	});
+		return next(new BadRequestResponse(e));
+
+	})
+
+	// UserModel.paginate(query, options, function (err, result) {
+	// 	if (err) {
+	// 		// console.log(err);
+	// 		next(new BadRequestResponse("Server Error"), 500);
+	// 		return;
+	// 	}
+	// 	// console.log(result);
+	// 	// console.log(":::Result:::::", result);
+	// 	// console.log(":::Result Docs:::::", result.docs);
+	// 	next(new OkResponse({
+	// 		result: result.docs
+	// 	}));
+	// 	return;
+	// }).catch((e) => {
+	// 	console.log(e);
+	// 	next(new BadRequestResponse(e.error));
+	// 	return;
+	// });
 });
 
 // View Specific User

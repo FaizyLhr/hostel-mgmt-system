@@ -191,8 +191,8 @@ UserSchema.methods.toJSON = function () {
 		noOfStayDays: this.noOfStayDays,
 		allocatedBedNum: this.allocatedBedNum,
 		gym: this.gym,
-		meals: this.meals,
-		clothes: this.clothes,
+		meal: this.meal,
+		clothe: this.clothe,
 	};
 };
 
@@ -207,8 +207,8 @@ UserSchema.methods.toAuthJSON = function () {
 		noOfStayDays: this.noOfStayDays,
 		allocatedBedNum: this.allocatedBedNum,
 		gym: this.gym,
-		meals: this.meals,
-		clothes: this.clothes,
+		meal: this.meal,
+		clothe: this.clothe,
 		token: this.generateJWT(),
 	};
 };
