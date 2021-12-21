@@ -5,6 +5,7 @@ import { AddComponent } from './add/add.component';
 import { DetailComponent } from '../customers/detail/detail.component';
 import { HomeComponent } from './home.component';
 import { ServicesComponent } from './services/services.component';
+import { AddStaffComponent } from './add-staff/add-staff.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
           ),
       },
       // { path: 'get/all', component: Custo },
-      { path: 'add', component: AddComponent },
+      { path: 'add/customer', component: AddComponent },
+      { path: 'add/staff', component: AddStaffComponent },
       { path: 'addServices/:email', component: ServicesComponent },
     ],
   },

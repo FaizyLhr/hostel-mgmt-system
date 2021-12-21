@@ -6,11 +6,11 @@ import { BedsService, UserService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.css'],
+  selector: 'app-add-staff',
+  templateUrl: './add-staff.component.html',
+  styleUrls: ['./add-staff.component.css'],
 })
-export class AddComponent implements OnInit {
+export class AddStaffComponent implements OnInit {
   addCustomerForm!: FormGroup;
   beds: any;
 
@@ -21,30 +21,12 @@ export class AddComponent implements OnInit {
     private router: Router
   ) {}
 
-  noOfStayDaysOptions = [
-    {
-      title: '0',
-      value: 0,
-    },
-    {
-      title: '1',
-      value: 1,
-    },
-    {
-      title: '2',
-      value: 2,
-    },
-    {
-      title: '3',
-      value: 3,
-    },
-  ];
-
   ngOnInit(): void {
     this.addCustomerForm = this.formBuilder.group({
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      role: ['customer', Validators.required],
       noOfStayDays: 0,
       allocatedBedNum: '',
     });
@@ -54,6 +36,25 @@ export class AddComponent implements OnInit {
     //   this.role = x;
     // });
   }
+
+  workingDurationOptions = [
+    {
+      title: '1-3 months',
+      value: 0,
+    },
+    {
+      title: '3-6 months',
+      value: 1,
+    },
+    {
+      title: '6-9 months',
+      value: 2,
+    },
+    {
+      title: 'above 12 months',
+      value: 3,
+    },
+  ];
 
   onSubmit(): void {
     console.log(this.addCustomerForm);
