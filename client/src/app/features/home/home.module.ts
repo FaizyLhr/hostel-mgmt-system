@@ -6,15 +6,9 @@ import { HomeComponent } from './home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddComponent } from './add/add.component';
 import { ServicesComponent } from './services/services.component';
-import { DetailComponent } from './detail/detail.component';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    AddComponent,
-    ServicesComponent,
-    DetailComponent,
-  ],
+  declarations: [HomeComponent, AddComponent, ServicesComponent],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
 })
 export class HomeModule {}

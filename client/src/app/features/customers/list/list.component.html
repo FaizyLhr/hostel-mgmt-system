@@ -15,7 +15,9 @@
         <td>{{ user?.lastName }}</td>
         <td>{{ user?.email }}</td>
         <td>
-          <a class="btn btn-info" (click)="setUser(i)" routerLink="/home/report"
+          <a
+            class="btn btn-info"
+            [routerLink]="['/home/get/report', user?.slug]"
             >View Report</a
           >
           <a

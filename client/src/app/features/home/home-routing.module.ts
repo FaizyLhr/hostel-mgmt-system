@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../layouts/layout.component';
 import { AddComponent } from './add/add.component';
-import { DetailComponent } from './detail/detail.component';
+import { DetailComponent } from '../customers/detail/detail.component';
 import { HomeComponent } from './home.component';
 import { ServicesComponent } from './services/services.component';
 
@@ -22,7 +22,6 @@ const routes: Routes = [
       // { path: 'get/all', component: Custo },
       { path: 'add', component: AddComponent },
       { path: 'addServices/:email', component: ServicesComponent },
-      { path: 'report', component: DetailComponent },
     ],
   },
 ];
