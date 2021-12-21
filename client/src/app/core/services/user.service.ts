@@ -94,12 +94,15 @@ export class UserService {
   }
 
   addServices(data: any, email: string): Observable<any> {
-    console.log(data);
-    console.log(email);
+    // console.log('Email::', email);
+    // console.log('newD::', data);
+    data.gym = Boolean(data.gym);
+    data.clothe = +data.clothe;
+    data.meal = +data.meal;
+    // console.log('Data:::', data);
+    // console.log('GYM::', data.gym);
 
-    return this.apiService.put('/users/addServices/' + email, {
-      user: data,
-    });
+    return this.apiService.put('/users/addServices/' + email, data);
   }
 
   getCurrentUser(): any {
@@ -108,6 +111,8 @@ export class UserService {
 
   // Update the user on the server (email, pass, etc)
   update(user: any): Observable<any> {
+    console.log('USer::::::', user);
+
     return this.apiService.put('/user', { user }).pipe(
       map((data) => {
         // Update the currentUser observable

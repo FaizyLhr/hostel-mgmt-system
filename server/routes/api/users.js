@@ -161,6 +161,7 @@ router.get("/context", isToken, (req, res, next) => {
 });
 
 router.put("/addServices/:email", isToken, isAdmin, (req, res, next) => {
+	// console.log(req.body)
 	if (req.body.meal) {
 		req.emailUser.meal = req.body.meal;
 	}

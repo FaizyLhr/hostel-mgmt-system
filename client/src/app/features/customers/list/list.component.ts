@@ -23,6 +23,8 @@ export class ListComponent implements OnInit {
     });
   }
 
+  setUser(user: Object) {}
+
   changeStatus(index: number) {
     this.userService
       .changeStatus(this.allUsers[index].user.email)

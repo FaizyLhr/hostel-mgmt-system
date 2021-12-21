@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       // { path: 'get/all', component: Custo },
       { path: 'add', component: AddComponent },
-      { path: 'addServices', component: ServicesComponent },
+      { path: 'addServices/:email', component: ServicesComponent },
       { path: 'report', component: DetailComponent },
     ],
   },

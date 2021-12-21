@@ -15,7 +15,14 @@
         <td>{{ user?.lastName }}</td>
         <td>{{ user?.email }}</td>
         <td>
-          <a class="btn btn-info" routerLink="/home/report">View Report</a>
+          <a class="btn btn-info" (click)="setUser(i)" routerLink="/home/report"
+            >View Report</a
+          >
+          <a
+            class="btn btn-success"
+            [routerLink]="['/home/addServices', user?.email]"
+            >Add Service</a
+          >
           <!-- <a (click)="changeStatus(i)"><i class="fas fa-lock"></i></a> -->
         </td>
       </tr>
