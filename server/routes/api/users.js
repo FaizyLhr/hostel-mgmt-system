@@ -50,8 +50,8 @@ router.get("/", function (req, res, next) {
 	}));
 });
 
-router.post("/add", isToken, isAdmin, (req, res, next) => {
-
+router.post("/addStaff", isToken, isAdmin, (req, res, next) => {
+	console.log(req.body);
 	// console.log(req.user);
 	if (!req.body.user || !req.body.user.email || !req.body.user.firstName || !req.body.user.lastName) {
 		return next(new BadRequestResponse("Missing Required parameters"));
@@ -61,47 +61,59 @@ router.post("/add", isToken, isAdmin, (req, res, next) => {
 		req.body.user.lastName.length === 0
 	) {
 		return next(new BadRequestResponse("Missing Required parameters"));
-
-	}
-
-	if (
-		(+req.body.user.allocatedBedNum !== 0 || req.body.user.noOfStayDays) && (+req.body.user.workingDuration !== 0 || req.body.user.jobDescription)
-	) {
-		return next(new BadRequestResponse("You Can't a customer and Staff at a time"));
-	} else if (+req.body.user.allocatedBedNum !== 0 || req.body.user.noOfStayDays) {
-		console.log("3");
-		req.role = 3;
-	} else if (+req.body.user.workingDuration !== 0 || req.body.user.jobDescription) {
-		console.log("2");
-		req.role = 2;
 	}
 	// Create user in our database
 	let newUser = UserModel();
-
 	newUser.email = req.body.user.email;
 	newUser.firstName = req.body.user.firstName;
 	newUser.lastName = req.body.user.lastName;
-	newUser.role = req.role;
+	newUser.role = 2;
 	newUser.isEmailVerified = true;
-
-	if (req.role === 2) {
-		// for Staff
-		if (req.body.user.jobDescription) {
-			newUser.jobDescription = req.body.user.jobDescription;
-		}
-		if (req.body.user.workingDuration) {
-			newUser.workingDuration = req.body.user.workingDuration;
-		}
+	// for Staff
+	if (req.body.user.jobDescription) {
+		newUser.jobDescription = req.body.user.jobDescription;
 	}
-
+	if (req.body.user.workingDuration !== 0) {
+		newUser.workingDuration = req.body.user.workingDuration;
+	}
 	// console.log(newUser);
-	if (req.role === 3) {
-		// for Customer
-		console.log(req.body);
-		if (req.body.user.noOfStayDays) {
-			newUser.noOfStayDays = req.body.user.noOfStayDays;
+	newUser.save((err, result) => {
+		if (err) {
+			// console.log(err);
+			return next(new BadRequestResponse(err));
+		} else {
+			// console.log(result);
+			return next(new OkResponse(result));
 		}
-		if (req.body.user.allocatedBedNum) {
+	});
+})
+
+router.post("/addCustomer", isToken, isAdmin, (req, res, next) => {
+	console.log(req.body);
+	// console.log(req.user);
+	if (!req.body.user || !req.body.user.email || !req.body.user.firstName || !req.body.user.lastName) {
+		return next(new BadRequestResponse("Missing Required parameters"));
+	} else if (
+		req.body.user.email.length === 0 ||
+		req.body.user.firstName.length === 0 ||
+		req.body.user.lastName.length === 0
+	) {
+		return next(new BadRequestResponse("Missing Required parameters"));
+	}
+	// Create user in our database
+	let newUser = UserModel();
+	newUser.email = req.body.user.email;
+	newUser.firstName = req.body.user.firstName;
+	newUser.lastName = req.body.user.lastName;
+	newUser.role = 3;
+	newUser.isEmailVerified = true;
+	// for Customer
+	console.log(req.body);
+	if (req.body.user.noOfStayDays !== 0) {
+		newUser.noOfStayDays = req.body.user.noOfStayDays;
+	}
+	if (req.body.user.allocatedBedNum) {
+		newUser.save().then((result) => {
 			BedModel.findOne({
 				bedNum: req.body.user.allocatedBedNum
 			}).then((bed) => {
@@ -113,28 +125,20 @@ router.post("/add", isToken, isAdmin, (req, res, next) => {
 				bed.allocatedTo = newUser._id;
 				newUser.allocatedBedNum = bed.bedNum;
 
-				// console.log(newUser);
-				newUser.save((err, result) => {
-					if (err) {
-						// console.log(err);
-						return next(new BadRequestResponse(err));
-					} else {
-						// console.log(result);
-						return next(new OkResponse(result));
-					}
-				});
-
 				bed.save((err, result) => {
 					if (err) return next(new BadRequestResponse(err));
 					console.log("Status Changed");
 				})
+				// console.log(newUser);
+				return next(new OkResponse(result));
+
 			}).catch(() => {
 				return next(new BadRequestResponse("No Bed Found"));
 			})
-
-		}
+		}).catch((err) => {
+			return next(new BadRequestResponse(err));
+		});
 	}
-
 
 });
 
@@ -277,97 +281,93 @@ router.get("/get/:email", isToken, (req, res, next) => {
 });
 
 // Update Specific User
-router.put("/update/:email", isToken, (req, res, next) => {
+router.put("/edit/:email", isToken, (req, res, next) => {
 	// console.log("Context User:::::::::::::", req.user);
 	// console.log("Required::::::::::::::::::::", req.emailUser);
-	if (req.user.email === req.emailUser.email || req.user.role === 1) {
-		UserModel.findOne({
-				email: req.emailUser.email
-			})
-			.then((updateUser) => {
-				// console.log(updateUser);
-				console.log(req.body);
+	UserModel.findOne({
+			email: req.emailUser.email
+		})
+		.then((updateUser) => {
+			// console.log(updateUser);
+			console.log(req.body);
 
-				if (req.body.email) {
-					updateUser.email = req.body.email;
-				}
-				if (req.body.category) {
-					updateUser.category = req.body.category;
-				}
-				if (req.body.nameChinese) {
-					updateUser.nameChinese = req.body.nameChinese;
-				}
-				if (req.body.nameEng) {
-					updateUser.nameEng = req.body.nameEng;
-				}
-				if (req.body.phone) {
-					updateUser.phone = req.body.phone;
-				}
-				if (req.body.age) {
-					updateUser.age = req.body.age;
-				}
-				if (req.body.gender) {
-					updateUser.gender = req.body.gender;
-				}
-				if (req.body.profilePic) {
-					updateUser.profilePic = req.body.profilePic;
-				}
-				if (req.body.backgroundPic) {
-					updateUser.backgroundPic = req.body.backgroundPic;
-				}
-				if (req.body.password) {
-					updateUser.setPassword(req.body.password);
-				}
-				if (req.emailUser.role === 2) {
-					if (req.body.tutor) {
-						if (req.body.tutor.experience) {
-							updateUser.tutor.experience = req.body.tutor.experience;
-						}
-						if (req.body.tutor.expertise) {
-							updateUser.tutor.expertise = req.body.tutor.expertise;
-						}
-						if (req.body.tutor.fbLink) {
-							updateUser.tutor.fbLink = req.body.tutor.fbLink;
-						}
-						if (req.body.tutor.instaLink) {
-							updateUser.tutor.instaLink = req.body.tutor.instaLink;
-						}
-						if (req.body.tutor.youtubeLink) {
-							updateUser.tutor.youtubeLink = req.body.tutor.youtubeLink;
-						}
+			if (req.body.email) {
+				updateUser.email = req.body.email;
+			}
+			if (req.body.category) {
+				updateUser.category = req.body.category;
+			}
+			if (req.body.nameChinese) {
+				updateUser.nameChinese = req.body.nameChinese;
+			}
+			if (req.body.nameEng) {
+				updateUser.nameEng = req.body.nameEng;
+			}
+			if (req.body.phone) {
+				updateUser.phone = req.body.phone;
+			}
+			if (req.body.age) {
+				updateUser.age = req.body.age;
+			}
+			if (req.body.gender) {
+				updateUser.gender = req.body.gender;
+			}
+			if (req.body.profilePic) {
+				updateUser.profilePic = req.body.profilePic;
+			}
+			if (req.body.backgroundPic) {
+				updateUser.backgroundPic = req.body.backgroundPic;
+			}
+			if (req.body.password) {
+				updateUser.setPassword(req.body.password);
+			}
+			if (req.emailUser.role === 2) {
+				if (req.body.tutor) {
+					if (req.body.tutor.experience) {
+						updateUser.tutor.experience = req.body.tutor.experience;
+					}
+					if (req.body.tutor.expertise) {
+						updateUser.tutor.expertise = req.body.tutor.expertise;
+					}
+					if (req.body.tutor.fbLink) {
+						updateUser.tutor.fbLink = req.body.tutor.fbLink;
+					}
+					if (req.body.tutor.instaLink) {
+						updateUser.tutor.instaLink = req.body.tutor.instaLink;
+					}
+					if (req.body.tutor.youtubeLink) {
+						updateUser.tutor.youtubeLink = req.body.tutor.youtubeLink;
 					}
 				}
-				if (req.emailUser.role === 3) {
-					if (req.body.student) {
-						if (req.body.student.interested) {
-							updateUser.student.interested = req.body.student.interested;
-						}
-						if (req.body.student.intro) {
-							updateUser.student.intro = req.body.student.intro;
-						}
+			}
+			if (req.emailUser.role === 3) {
+				if (req.body.student) {
+					if (req.body.student.interested) {
+						updateUser.student.interested = req.body.student.interested;
+					}
+					if (req.body.student.intro) {
+						updateUser.student.intro = req.body.student.intro;
 					}
 				}
+			}
 
-				// console.log(updateUser);
+			// console.log(updateUser);
 
-				updateUser
-					.save()
-					.then((user) => {
-						next(new OkResponse(user.toJSON()));
-						return;
-					})
-					.catch((err) => {
-						next(new BadRequestResponse(err));
-						return;
-					});
-			})
-			.catch((err) => {
-				next(new BadRequestResponse(err));
-				return;
-			});
-	} else {
-		next(new UnauthorizedResponse("Access Denied"));
-	}
+			updateUser
+				.save()
+				.then((user) => {
+					next(new OkResponse(user.toJSON()));
+					return;
+				})
+				.catch((err) => {
+					next(new BadRequestResponse(err));
+					return;
+				});
+		})
+		.catch((err) => {
+			next(new BadRequestResponse(err));
+			return;
+		});
 });
 
 // delete Specific User
