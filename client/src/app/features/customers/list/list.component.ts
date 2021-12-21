@@ -22,6 +22,4 @@ export class ListComponent implements OnInit {
       // console.log(this.allUsers);
     });
   }
-
-  setUser(user: Object) {}
 }

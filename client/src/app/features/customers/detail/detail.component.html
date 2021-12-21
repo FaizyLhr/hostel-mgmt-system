@@ -3,36 +3,31 @@
   <table class="table">
     <thead>
       <tr>
+        <th scope="col">Email</th>
         <th scope="col">First</th>
         <th scope="col">Last</th>
-        <th scope="col">Email</th>
-        <th scope="col">Action</th>
-        <th>jobDescription</th>
-        <th>workingDuration</th>
-        <th>noOfStayDays</th>
-        <th>allocatedBedNum</th>
-        <th>gym</th>
-        <th>meal</th>
-        <th>clothe</th>
+        <th scope="col">jobDescription</th>
+        <th scope="col">noOfStayDays</th>
+        <th scope="col">workingDuration</th>
+        <th scope="col">allocatedBedNum</th>
+        <th scope="col">gym</th>
+        <th scope="col">meal</th>
+        <th scope="col">clothe</th>
       </tr>
     </thead>
     <tbody>
       <!-- <tr *ngFor="let user of allUsers; let i = index"> -->
       <tr>
-        <!-- <td>{{ user?.firstName }}</td>
+        <td>{{ user?.email }}</td>
+        <td>{{ user?.firstName }}</td>
         <td>{{ user?.lastName }}</td>
-        <td>{{ user?.email }}</td> -->
-        <td>User Name</td>
-        <td>firstName</td>
-        <td>lastName</td>
-        <td>email</td>
-        <td>jobDescription</td>
-        <td>workingDuration</td>
-        <td>noOfStayDays</td>
-        <td>allocatedBedNum</td>
-        <td>gym</td>
-        <td>meal</td>
-        <td>clothe</td>
+        <td>{{ user?.jobDescription }}</td>
+        <td>{{ user?.noOfStayDays }}</td>
+        <td>{{ user?.workingDuration }}</td>
+        <td>{{ user?.allocatedBedNum }}</td>
+        <td>{{ user?.gym }}</td>
+        <td>{{ user?.meal }}</td>
+        <td>{{ user?.clothe }}</td>
       </tr>
     </tbody>
   </table>
