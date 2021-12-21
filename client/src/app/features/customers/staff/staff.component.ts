@@ -1,25 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services';
+
 import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css'],
+  selector: 'app-staff',
+  templateUrl: './staff.component.html',
+  styleUrls: ['./staff.component.css'],
 })
-export class ListComponent implements OnInit {
-  customerUsers: any;
+export class StaffComponent implements OnInit {
+  staffUsers: any;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.getCustomers();
+    this.getStaff();
   }
 
-  getCustomers() {
-    this.userService.getCustomers().subscribe(
+  getStaff() {
+    this.userService.getStaff().subscribe(
       (data) => {
         console.log(data);
-        this.customerUsers = data.data.result;
+        this.staffUsers = data.data.result;
         // console.log(this.customerUsers);
       },
       (err) => {

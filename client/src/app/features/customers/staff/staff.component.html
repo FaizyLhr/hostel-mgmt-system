@@ -1,9 +1,9 @@
-<p>list works!</p>
+<p>staff works!</p>
 <div class="container p-4">
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">No</th>
+        <th scope="col">No.</th>
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Email</th>
@@ -12,8 +12,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of customerUsers; let i = index">
-        <td>{{ i }}</td>
+      <tr *ngFor="let user of staffUsers; let i = index">
+        <td>{{ i + 1 }}</td>
         <td>{{ user?.firstName }}</td>
         <td>{{ user?.lastName }}</td>
         <td>{{ user?.email }}</td>

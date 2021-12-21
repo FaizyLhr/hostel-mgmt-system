@@ -126,6 +126,14 @@ export class UserService {
     );
   }
 
+  getCustomers(): Observable<any> {
+    return this.apiService.get('/users/home/get/customer');
+  }
+
+  getStaff(): Observable<any> {
+    return this.apiService.get('/users/home/get/staff');
+  }
+
   getAllUsers(): Observable<any> {
     return this.apiService.get('/users/all');
   }

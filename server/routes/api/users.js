@@ -187,45 +187,79 @@ router.put("/addServices/:email", isToken, isAdmin, (req, res, next) => {
 	})
 })
 
-// View All users
-router.get("/all", isToken, isAdmin, (req, res, next) => {
-	console.log("Inside");
+// View All staff
+router.get("/home/get/staff", isToken, isAdmin, (req, res, next) => {
+	// console.log("Inside");
 	const options = {
 		page: +req.query.page || 1,
-		limit: +req.query.limit || 10,
+		limit: +req.query.limit || 20,
 	};
 
 	let query = {};
-	// query.role = 1;
-	UserModel.find().then((result) => {
-		console.log(result)
-		next(new OkResponse({
-			result: result
-		}));
-		return;
-	}).catch((e) => {
-		return next(new BadRequestResponse(e));
-
-	})
-
-	// UserModel.paginate(query, options, function (err, result) {
-	// 	if (err) {
-	// 		// console.log(err);
-	// 		next(new BadRequestResponse("Server Error"), 500);
-	// 		return;
-	// 	}
-	// 	// console.log(result);
-	// 	// console.log(":::Result:::::", result);
-	// 	// console.log(":::Result Docs:::::", result.docs);
+	query.role = 2;
+	// UserModel.find().then((result) => {
+	// 	console.log(result)
 	// 	next(new OkResponse({
-	// 		result: result.docs
+	// 		result: result
 	// 	}));
 	// 	return;
 	// }).catch((e) => {
-	// 	console.log(e);
-	// 	next(new BadRequestResponse(e.error));
+	// 	return next(new BadRequestResponse(e));
+
+	// })
+
+	UserModel.paginate(query, options, function (err, result) {
+		if (err) {
+			// console.log(err);
+			return next(new BadRequestResponse("Server Error"), 500);;
+		}
+		// console.log(result);
+		// console.log(":::Result:::::", result);
+		// console.log(":::Result Docs:::::", result.docs);
+		return next(new OkResponse({
+			result: result.docs
+		}));;
+	}).catch((e) => {
+		console.log(e);
+		return next(new BadRequestResponse(e.error));
+	});
+});
+// View All customers
+router.get("/home/get/customer", isToken, isAdmin, (req, res, next) => {
+	// console.log("Inside");
+	const options = {
+		page: +req.query.page || 1,
+		limit: +req.query.limit || 20,
+	};
+
+	let query = {};
+	query.role = 3;
+	// UserModel.find().then((result) => {
+	// 	console.log(result)
+	// 	next(new OkResponse({
+	// 		result: result
+	// 	}));
 	// 	return;
-	// });
+	// }).catch((e) => {
+	// 	return next(new BadRequestResponse(e));
+
+	// })
+
+	UserModel.paginate(query, options, function (err, result) {
+		if (err) {
+			// console.log(err);
+			return next(new BadRequestResponse("Server Error"), 500);;
+		}
+		// console.log(result);
+		// console.log(":::Result:::::", result);
+		// console.log(":::Result Docs:::::", result.docs);
+		return next(new OkResponse({
+			result: result.docs
+		}));;
+	}).catch((e) => {
+		console.log(e);
+		return next(new BadRequestResponse(e.error));
+	});
 });
 
 // View Specific User

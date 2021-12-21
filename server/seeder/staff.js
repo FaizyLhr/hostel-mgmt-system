@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 async function seedStaff() {
 	// Staff Seeder
-	for (let i = 0; i < 20; i++) {
+	for (let i = 0; i < 10; i++) {
 		let newUser = new User();
 		newUser.role = 2;
 

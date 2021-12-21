@@ -1,10 +1,12 @@
 const faker = require("faker");
 const User = require("../models/User");
-const { beds } = require("../constants/beds");
+const {
+	beds
+} = require("../constants/beds");
 
 async function seedStaff() {
 	// Customer Seeder
-	for (let i = 0; i < 20; i++) {
+	for (let i = 0; i < 10; i++) {
 		let newUser = new User();
 		newUser.role = 3;
 
