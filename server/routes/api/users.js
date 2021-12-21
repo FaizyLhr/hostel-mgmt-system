@@ -281,7 +281,7 @@ router.get("/get/:email", isToken, (req, res, next) => {
 });
 
 // Update Specific User
-router.put("/edit/:email", isToken, (req, res, next) => {
+router.put("/home/edit/:email", isToken, (req, res, next) => {
 	// console.log("Context User:::::::::::::", req.user);
 	// console.log("Required::::::::::::::::::::", req.emailUser);
 	UserModel.findOne({
@@ -290,64 +290,20 @@ router.put("/edit/:email", isToken, (req, res, next) => {
 		.then((updateUser) => {
 			// console.log(updateUser);
 			console.log(req.body);
-
-			if (req.body.email) {
-				updateUser.email = req.body.email;
-			}
-			if (req.body.category) {
-				updateUser.category = req.body.category;
-			}
-			if (req.body.nameChinese) {
-				updateUser.nameChinese = req.body.nameChinese;
-			}
-			if (req.body.nameEng) {
-				updateUser.nameEng = req.body.nameEng;
-			}
-			if (req.body.phone) {
-				updateUser.phone = req.body.phone;
-			}
-			if (req.body.age) {
-				updateUser.age = req.body.age;
-			}
-			if (req.body.gender) {
-				updateUser.gender = req.body.gender;
-			}
-			if (req.body.profilePic) {
-				updateUser.profilePic = req.body.profilePic;
-			}
-			if (req.body.backgroundPic) {
-				updateUser.backgroundPic = req.body.backgroundPic;
-			}
-			if (req.body.password) {
-				updateUser.setPassword(req.body.password);
-			}
 			if (req.emailUser.role === 2) {
-				if (req.body.tutor) {
-					if (req.body.tutor.experience) {
-						updateUser.tutor.experience = req.body.tutor.experience;
-					}
-					if (req.body.tutor.expertise) {
-						updateUser.tutor.expertise = req.body.tutor.expertise;
-					}
-					if (req.body.tutor.fbLink) {
-						updateUser.tutor.fbLink = req.body.tutor.fbLink;
-					}
-					if (req.body.tutor.instaLink) {
-						updateUser.tutor.instaLink = req.body.tutor.instaLink;
-					}
-					if (req.body.tutor.youtubeLink) {
-						updateUser.tutor.youtubeLink = req.body.tutor.youtubeLink;
-					}
+				if (req.body.student.interested) {
+					updateUser.student.interested = req.body.student.interested;
+				}
+				if (req.body.student.intro) {
+					updateUser.student.intro = req.body.student.intro;
 				}
 			}
 			if (req.emailUser.role === 3) {
-				if (req.body.student) {
-					if (req.body.student.interested) {
-						updateUser.student.interested = req.body.student.interested;
-					}
-					if (req.body.student.intro) {
-						updateUser.student.intro = req.body.student.intro;
-					}
+				if (req.body.student.interested) {
+					updateUser.student.interested = req.body.student.interested;
+				}
+				if (req.body.student.intro) {
+					updateUser.student.intro = req.body.student.intro;
 				}
 			}
 

@@ -58,7 +58,7 @@ export class AddStaffComponent implements OnInit {
   onSubmit(): void {
     console.log(this.addStaffForm);
 
-    this.usersService.postUsers(this.addStaffForm.value).subscribe(
+    this.usersService.postStaff(this.addStaffForm.value).subscribe(
       (data) => {
         console.log(data);
         Swal.fire({

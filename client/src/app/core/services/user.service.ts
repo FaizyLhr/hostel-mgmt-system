@@ -93,6 +93,16 @@ export class UserService {
     return this.apiService.post('/users/add', { user: data });
   }
 
+  postCustomer(data: any) {
+    // console.log(data);
+    return this.apiService.post('/users/addCustomer', { user: data });
+  }
+
+  postStaff(data: any) {
+    // console.log(data);
+    return this.apiService.post('/users/addStaff', { user: data });
+  }
+
   addServices(data: any, email: string): Observable<any> {
     // console.log('Email::', email);
     // console.log('newD::', data);

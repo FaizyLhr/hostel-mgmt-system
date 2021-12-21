@@ -6,6 +6,7 @@ import { DetailComponent } from '../customers/detail/detail.component';
 import { HomeComponent } from './home.component';
 import { ServicesComponent } from './services/services.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
+import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,8 @@ const routes: Routes = [
       { path: 'add/customer', component: AddComponent },
       { path: 'add/staff', component: AddStaffComponent },
       { path: 'addServices/:email', component: ServicesComponent },
+      { path: 'edit/:email', component: EditComponent },
+      { path: 'del/:email', component: HomeComponent },
     ],
   },
 ];

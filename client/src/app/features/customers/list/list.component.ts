@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
 @Component({
@@ -9,7 +10,7 @@ import Swal from 'sweetalert2';
 export class ListComponent implements OnInit {
   customerUsers: any;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.getCustomers();
@@ -32,4 +33,8 @@ export class ListComponent implements OnInit {
       }
     );
   }
+
+  // updateProfile() {
+  //   this.profileForm.patchValue({});
+  // }
 }

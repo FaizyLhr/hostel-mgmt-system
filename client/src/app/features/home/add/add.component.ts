@@ -23,10 +23,6 @@ export class AddComponent implements OnInit {
 
   noOfStayDaysOptions = [
     {
-      title: '0',
-      value: 0,
-    },
-    {
       title: '1',
       value: 1,
     },
@@ -37,6 +33,10 @@ export class AddComponent implements OnInit {
     {
       title: '3',
       value: 3,
+    },
+    {
+      title: '4',
+      value: 4,
     },
   ];
 
@@ -58,7 +58,7 @@ export class AddComponent implements OnInit {
   onSubmit(): void {
     console.log(this.addCustomerForm);
 
-    this.usersService.postUsers(this.addCustomerForm.value).subscribe(
+    this.usersService.postCustomer(this.addCustomerForm.value).subscribe(
       (data) => {
         console.log(data);
         Swal.fire({
