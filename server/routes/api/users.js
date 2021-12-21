@@ -213,22 +213,16 @@ router.get("/all", isToken, isAdmin, (req, res, next) => {
 
 // View Specific User
 router.get("/:email", isToken, (req, res, next) => {
-	if (req.user.email === req.emailUser.email || req.user.role === 1) {
-		UserModel.findOne({
-				email: req.emailUser.email
-			})
-			.then((user) => {
-				next(new OkResponse(user.toJSON()));
-				return;
-			})
-			.catch((err) => {
-				next(new BadRequestResponse(err));
-				return;
-			});
-	} else {
-		next(new UnauthorizedResponse("Access Denied"));
-		return;
-	}
+	UserModel.findOne({
+			email: req.emailUser.email
+		})
+		.then((user) => {
+			return next(new OkResponse(user));;
+		})
+		.catch((err) => {
+			return next(new BadRequestResponse(err));
+		});
+
 });
 
 // Update Specific User
