@@ -212,7 +212,7 @@ router.get("/all", isToken, isAdmin, (req, res, next) => {
 });
 
 // View Specific User
-router.get("/:email", isToken, (req, res, next) => {
+router.get("/get/:email", isToken, (req, res, next) => {
 	UserModel.findOne({
 			email: req.emailUser.email
 		})
