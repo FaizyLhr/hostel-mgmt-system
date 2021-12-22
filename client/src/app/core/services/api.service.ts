@@ -29,7 +29,7 @@ export class ApiService {
   }
 
   put(path: string, body: Object = {}): Observable<any> {
-    // console.log(body,path);
+    // console.log('CHK', body, path);
 
     return this.http
       .put(`${environment.api_url}${path}`, body)

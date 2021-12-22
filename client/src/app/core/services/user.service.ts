@@ -124,16 +124,19 @@ export class UserService {
   }
 
   // Update the user on the server (email, pass, etc)
-  update(user: any): Observable<any> {
-    // console.log('USer::::::', user);
+  update(user: any, email: any): Observable<any> {
+    console.log('USer::::::', user);
 
-    return this.apiService.put('/user', { user }).pipe(
-      map((data) => {
-        // Update the currentUser observable
-        this.currentUserSubject.next(data.user);
-        return data.user;
-      })
-    );
+    return this.apiService.put(`/users/home/edit/${email}`, user);
+    // .pipe(
+    //   map((data) => {
+    //     console.log('DAT', data);
+
+    //     // Update the currentUser observable
+    //     this.currentUserSubject.next(data.user);
+    //     return data.user;
+    //   })
+    // );
   }
 
   getCustomers(): Observable<any> {
@@ -150,5 +153,9 @@ export class UserService {
 
   changeStatus(email: string): Observable<any> {
     return this.apiService.put('/users/verify/' + email);
+  }
+
+  deleteUser(email: string): Observable<any> {
+    return this.apiService.delete('/users/delUser/' + email);
   }
 }

@@ -1,8 +1,8 @@
 <p>list works!</p>
 <div class="container p-4">
-  <!-- <a class="btn btn-outline-success" [routerLink]="['/home/add/customer']"
+  <a class="btn btn-outline-success" [routerLink]="['/home/add/customer']"
     >Add Customer</a
-  > -->
+  >
   <table class="table">
     <thead>
       <tr>
@@ -38,11 +38,7 @@
             >Edit</a
           >
 
-          <a
-            class="btn btn-outline-danger"
-            [routerLink]="['/home/del/', user?.email]"
-            >Delete</a
-          >
+          <a class="btn btn-outline-danger" (click)="delUser(user)">Delete</a>
           <!-- <a (click)="changeStatus(i)"><i class="fas fa-lock"></i></a> -->
         </td>
       </tr>

@@ -35,7 +35,7 @@ router.param("email", (req, res, next, email) => {
 		email
 	}, (err, user) => {
 		if (!err && user !== null) {
-			// console.log(user);
+			console.log(user);
 			req.emailUser = user;
 			return next();
 		}
@@ -282,6 +282,7 @@ router.get("/get/:email", isToken, (req, res, next) => {
 
 // Update Specific User
 router.put("/home/edit/:email", isToken, (req, res, next) => {
+	console.log(req.body);
 	// console.log("Context User:::::::::::::", req.user);
 	// console.log("Required::::::::::::::::::::", req.emailUser);
 	UserModel.findOne({
@@ -290,20 +291,33 @@ router.put("/home/edit/:email", isToken, (req, res, next) => {
 		.then((updateUser) => {
 			// console.log(updateUser);
 			console.log(req.body);
+			console.log(updateUser.role);
+			if (req.body.email) {
+				updateUser.email = req.body.email;
+			}
+			if (req.body.firstName) {
+				updateUser.firstName = req.body.firstName;
+			}
+			if (req.body.lastName) {
+				updateUser.lastName = req.body.lastName;
+			}
+
 			if (req.emailUser.role === 2) {
-				if (req.body.student.interested) {
-					updateUser.student.interested = req.body.student.interested;
+				if (req.body.jobDescription) {
+					updateUser.jobDescription = req.body.jobDescription;
 				}
-				if (req.body.student.intro) {
-					updateUser.student.intro = req.body.student.intro;
+				if (req.body.workingDuration) {
+					updateUser.workingDuration = req.body.workingDuration;
 				}
 			}
 			if (req.emailUser.role === 3) {
-				if (req.body.student.interested) {
-					updateUser.student.interested = req.body.student.interested;
+				console.log(req.body.allocatedBedNum);
+				console.log(req.body.noOfStayDays);
+				if (req.body.allocatedBedNum) {
+					updateUser.allocatedBedNum = req.body.allocatedBedNum;
 				}
-				if (req.body.student.intro) {
-					updateUser.student.intro = req.body.student.intro;
+				if (req.body.noOfStayDays) {
+					updateUser.noOfStayDays = req.body.noOfStayDays;
 				}
 			}
 
@@ -312,17 +326,14 @@ router.put("/home/edit/:email", isToken, (req, res, next) => {
 			updateUser
 				.save()
 				.then((user) => {
-					next(new OkResponse(user.toJSON()));
-					return;
+					return next(new OkResponse(user));;
 				})
 				.catch((err) => {
-					next(new BadRequestResponse(err));
-					return;
+					return next(new BadRequestResponse(err));
 				});
 		})
 		.catch((err) => {
-			next(new BadRequestResponse(err));
-			return;
+			return next(new BadRequestResponse(err));;
 		});
 });
 

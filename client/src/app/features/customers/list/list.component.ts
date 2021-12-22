@@ -34,6 +34,20 @@ export class ListComponent implements OnInit {
     );
   }
 
+  delUser(user: any) {
+    this.userService.deleteUser(user.email).subscribe(
+      (result) => {
+        console.log(result);
+        if (result.status === 200) {
+          this.getCustomers();
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
   // updateProfile() {
   //   this.profileForm.patchValue({});
   // }

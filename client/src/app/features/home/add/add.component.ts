@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BedsService, UserService } from 'src/app/core/services';
 
 import Swal from 'sweetalert2';
@@ -13,6 +13,9 @@ import Swal from 'sweetalert2';
 export class AddComponent implements OnInit {
   addCustomerForm!: FormGroup;
   beds: any;
+  email: string = '';
+  flag: string = 'false';
+  user: any;
 
   constructor(
     private usersService: UserService,
@@ -48,16 +51,11 @@ export class AddComponent implements OnInit {
       noOfStayDays: 0,
       allocatedBedNum: '',
     });
-
-    // this.addCustomerForm.get('role')?.valueChanges.subscribe((x) => {
-    //   // console.log(x);
-    //   this.role = x;
-    // });
   }
 
   onSubmit(): void {
     console.log(this.addCustomerForm);
-
+    // console.log('Method', this.user);
     this.usersService.postCustomer(this.addCustomerForm.value).subscribe(
       (data) => {
         console.log(data);
