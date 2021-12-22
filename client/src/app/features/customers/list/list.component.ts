@@ -38,12 +38,25 @@ export class ListComponent implements OnInit {
     this.userService.deleteUser(user.email).subscribe(
       (result) => {
         console.log(result);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Customer Deleted',
+          showConfirmButton: false,
+          timer: 1500,
+        });
         if (result.status === 200) {
           this.getCustomers();
         }
       },
       (err) => {
         console.log(err);
+        Swal.fire({
+          title: 'Error!',
+          text: err.message,
+          icon: 'error',
+          confirmButtonText: 'Go Back',
+        });
       }
     );
   }

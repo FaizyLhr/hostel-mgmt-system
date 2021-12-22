@@ -1,4 +1,4 @@
-<p>detail works!</p>
+<p>detail-staff works!</p>
 <div class="container p-4">
   <table class="table">
     <thead>
@@ -6,11 +6,8 @@
         <th scope="col">Email</th>
         <th scope="col">First</th>
         <th scope="col">Last</th>
-        <th scope="col">Days</th>
-        <th scope="col">Bed Num</th>
-        <th scope="col">gym</th>
-        <th scope="col">meal</th>
-        <th scope="col">clothe</th>
+        <th scope="col">Job Description</th>
+        <th scope="col">workingDuration</th>
       </tr>
     </thead>
     <tbody>
@@ -19,11 +16,8 @@
         <td>{{ user?.email }}</td>
         <td>{{ user?.firstName }}</td>
         <td>{{ user?.lastName }}</td>
-        <td>{{ user?.noOfStayDays }}</td>
-        <td>{{ user?.allocatedBedNum }}</td>
-        <td>{{ user?.gym }}</td>
-        <td>{{ user?.meal }}</td>
-        <td>{{ user?.clothe }}</td>
+        <td>{{ user?.jobDescription }}</td>
+        <td>{{ user?.workingDuration }}</td>
       </tr>
     </tbody>
   </table>

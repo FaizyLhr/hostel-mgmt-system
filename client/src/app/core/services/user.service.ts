@@ -104,14 +104,6 @@ export class UserService {
   }
 
   addServices(data: any, email: string): Observable<any> {
-    // console.log('Email::', email);
-    // console.log('newD::', data);
-    data.gym = Boolean(data.gym);
-    data.clothe = +data.clothe;
-    data.meal = +data.meal;
-    // console.log('Data:::', data);
-    // console.log('GYM::', data.gym);
-
     return this.apiService.put('/users/addServices/' + email, data);
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services';
 
 import Swal from 'sweetalert2';
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 export class StaffComponent implements OnInit {
   staffUsers: any;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.getStaff();
@@ -21,21 +22,36 @@ export class StaffComponent implements OnInit {
     this.userService.deleteUser(user.email).subscribe(
       (result) => {
         console.log(result);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Staff Member Deleted',
+          showConfirmButton: false,
+          timer: 1500,
+        });
         if (result.status === 200) {
           this.getStaff();
         }
       },
       (err) => {
         console.log(err);
+        Swal.fire({
+          title: 'Error!',
+          text: err.message,
+          icon: 'error',
+          confirmButtonText: 'Go Back',
+        });
       }
     );
   }
 
   getStaff() {
     this.userService.getStaff().subscribe(
-      (data) => {
-        console.log(data);
-        this.staffUsers = data.data.result;
+      (result) => {
+        console.log(result);
+        this.staffUsers = result.data.result;
+
+        // this.router.navigate(['/home/get/staff']);
         // console.log(this.customerUsers);
       },
       (err) => {

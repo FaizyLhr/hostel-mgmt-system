@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class ServicesComponent implements OnInit {
   addCustomerServiceForm!: FormGroup;
   beds: any;
-  gym: boolean = false;
+  gym: string = 'no';
   email: any;
 
   clotheOptions = [
@@ -34,6 +34,7 @@ export class ServicesComponent implements OnInit {
       value: 4,
     },
   ];
+
   mealOptions = [
     {
       title: '1',
@@ -52,6 +53,7 @@ export class ServicesComponent implements OnInit {
       value: 4,
     },
   ];
+  user: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -68,13 +70,25 @@ export class ServicesComponent implements OnInit {
     this.addCustomerServiceForm = this.formBuilder.group({
       clothe: 0,
       meal: 0,
-      gym: false,
+      gym: 'no',
     });
+
+    this.getUser();
 
     // this.addCustomerServiceForm.get('gym')?.valueChanges.subscribe((x) => {
     //   // console.log(x);
     //   this.gym = x;
     // });
+  }
+
+  getUser() {
+    this.userService.getUser(this.email).subscribe((result) => {
+      console.log('result', result);
+      this.user = result.data;
+      this.addCustomerServiceForm.patchValue(result.data);
+
+      // console.log(this.user);
+    });
   }
 
   onSubmit(): void {

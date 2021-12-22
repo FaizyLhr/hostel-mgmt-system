@@ -16,6 +16,7 @@ export class AddComponent implements OnInit {
   email: string = '';
   flag: string = 'false';
   user: any;
+  num: any;
 
   constructor(
     private usersService: UserService,
@@ -51,6 +52,13 @@ export class AddComponent implements OnInit {
       noOfStayDays: 0,
       allocatedBedNum: '',
     });
+
+    this.addCustomerForm
+      .get('allocatedBedNum')
+      ?.valueChanges.subscribe((res) => {
+        console.log(res);
+        this.num = res;
+      });
   }
 
   onSubmit(): void {

@@ -35,7 +35,7 @@ router.param("email", (req, res, next, email) => {
 		email
 	}, (err, user) => {
 		if (!err && user !== null) {
-			console.log(user);
+			// console.log(user);
 			req.emailUser = user;
 			return next();
 		}
@@ -51,7 +51,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/addStaff", isToken, isAdmin, (req, res, next) => {
-	console.log(req.body);
+	// console.log(req.body);
 	// console.log(req.user);
 	if (!req.body.user || !req.body.user.email || !req.body.user.firstName || !req.body.user.lastName) {
 		return next(new BadRequestResponse("Missing Required parameters"));
@@ -108,39 +108,48 @@ router.post("/addCustomer", isToken, isAdmin, (req, res, next) => {
 	newUser.role = 3;
 	newUser.isEmailVerified = true;
 	// for Customer
-	console.log(req.body);
 	if (req.body.user.noOfStayDays !== 0) {
 		newUser.noOfStayDays = req.body.user.noOfStayDays;
 	}
-	if (req.body.user.allocatedBedNum) {
-		newUser.save().then((result) => {
-			BedModel.findOne({
-				bedNum: req.body.user.allocatedBedNum
-			}).then((bed) => {
-				if (bed.isFree === false) {
-					return next(new BadRequestResponse("Bed Already Reserved"));
-				}
-				// console.log("Bed::::", bed);
-				bed.isFree = false;
-				bed.allocatedTo = newUser._id;
-				newUser.allocatedBedNum = bed.bedNum;
-
-				bed.save((err, result) => {
+	newUser.allocatedBedNum = req.body.user.allocatedBedNum;
+	// console.log(req.body.user.allocatedBedNum);
+	if (req.body.user.allocatedBedNum !== 0) {
+		BedModel.findOne({
+			bedNum: +req.body.user.allocatedBedNum
+		}).then((bed) => {
+			console.log(bed);
+			if (!bed) {
+				return next(new BadRequestResponse("Bed Not Exist"));
+			}
+			if (bed.isFree === false) {
+				return next(new BadRequestResponse("Bed Already Reserved"));
+			}
+			bed.isFree = false;
+			bed.allocatedTo = newUser._id;
+			// console.log(bed)
+			// console.log(newUser)
+			newUser.save().then((result) => {
+				// console.log("BedNum::::", newUser.allocatedBedNum);
+				// console.log("::::::::::::::::::::")
+				bed.save((err, data) => {
 					if (err) return next(new BadRequestResponse(err));
 					console.log("Status Changed");
 				})
 				// console.log(newUser);
 				return next(new OkResponse(result));
 
-			}).catch(() => {
-				return next(new BadRequestResponse("No Bed Found"));
+			}).catch((e) => {
+				// console.log(e);
+				return next(new BadRequestResponse(e));
 			})
 		}).catch((err) => {
-			return next(new BadRequestResponse(err));
-		});
+			return next(new BadRequestResponse(err))
+		})
 	}
 
-});
+
+})
+
 
 // Login
 router.post(
@@ -224,7 +233,7 @@ router.get("/home/get/staff", isToken, isAdmin, (req, res, next) => {
 			result: result.docs
 		}));;
 	}).catch((e) => {
-		console.log(e);
+		// console.log(e);
 		return next(new BadRequestResponse(e.error));
 	});
 });
@@ -261,7 +270,7 @@ router.get("/home/get/customer", isToken, isAdmin, (req, res, next) => {
 			result: result.docs
 		}));;
 	}).catch((e) => {
-		console.log(e);
+		// console.log(e);
 		return next(new BadRequestResponse(e.error));
 	});
 });
@@ -282,7 +291,7 @@ router.get("/get/:email", isToken, (req, res, next) => {
 
 // Update Specific User
 router.put("/home/edit/:email", isToken, (req, res, next) => {
-	console.log(req.body);
+	// console.log(req.body);
 	// console.log("Context User:::::::::::::", req.user);
 	// console.log("Required::::::::::::::::::::", req.emailUser);
 	UserModel.findOne({
@@ -290,8 +299,8 @@ router.put("/home/edit/:email", isToken, (req, res, next) => {
 		})
 		.then((updateUser) => {
 			// console.log(updateUser);
-			console.log(req.body);
-			console.log(updateUser.role);
+			// console.log(req.body);
+			// console.log(updateUser.role);
 			if (req.body.email) {
 				updateUser.email = req.body.email;
 			}
@@ -311,8 +320,8 @@ router.put("/home/edit/:email", isToken, (req, res, next) => {
 				}
 			}
 			if (req.emailUser.role === 3) {
-				console.log(req.body.allocatedBedNum);
-				console.log(req.body.noOfStayDays);
+				// console.log(req.body.allocatedBedNum);
+				// console.log(req.body.noOfStayDays);
 				if (req.body.allocatedBedNum) {
 					updateUser.allocatedBedNum = req.body.allocatedBedNum;
 				}
@@ -339,15 +348,36 @@ router.put("/home/edit/:email", isToken, (req, res, next) => {
 
 // delete Specific User
 router.delete("/delUser/:email", isToken, isAdmin, async (req, res, next) => {
+	console.log(req.emailUser.allocatedBedNum);
+	if (+req.emailUser.allocatedBedNum === 0 && req.emailUser.role === 3) {
+		return next(new BadRequestResponse("Default Bed Number. Please update it before Deletion"));
+	}
+	if (req.emailUser.role === 3) {
+		BedModel.findOne({
+			bedNum: req.emailUser.allocatedBedNum
+		}).then((bed) => {
+			bed.isFree = true;
+			bed.allocatedTo = null;
+			req.bed = bed;
+			console.log(req.bed);
+		}).catch((e) => {
+			return next(new BadRequestResponse(e));
+		})
+	}
 	req.emailUser
 		.remove()
 		.then((user) => {
-			next(new OkResponse(user.toJSON()));
-			return;
+			console.log(req.bed);
+			if (user.role === 3) {
+				req.bed.save((err, result) => {
+					if (err) return next(new BadRequestResponse(err));
+					console.log("Bed Is Available");
+				})
+			}
+			return next(new OkResponse(user));
 		})
 		.catch((err) => {
-			next(new BadRequestResponse(err));
-			return;
+			return next(new BadRequestResponse(err));
 		});
 });
 

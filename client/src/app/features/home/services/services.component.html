@@ -34,11 +34,11 @@
     <div>
       <label>
         <b>Add Gym:</b>
-        <input type="radio" value="false" formControlName="gym" />
+        <input type="radio" value="no" formControlName="gym" />
         <span>No</span>
       </label>
       <label>
-        <input type="radio" value="true" formControlName="gym" />
+        <input type="radio" value="yes" formControlName="gym" />
         <span>Yes</span>
       </label>
     </div>
@@ -54,7 +54,7 @@
           (click)="onSubmit()"
         >
           <!-- [disabled]="addCustomerForm.invalid" -->
-          Add Services
+          Save Services
         </button>
       </div>
     </div>

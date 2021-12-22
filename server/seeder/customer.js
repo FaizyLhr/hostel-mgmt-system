@@ -9,13 +9,11 @@ async function seedStaff() {
 	for (let i = 0; i < 10; i++) {
 		let newUser = new User();
 		newUser.role = 3;
-
 		newUser.email = faker.internet.email();
-
 		newUser.firstName = faker.lorem.word(5);
 		newUser.lastName = faker.lorem.word(5);
 
-		newUser.allocatedBed = beds[i].bedNum;
+		newUser.allocatedBedNum = beds[i].bedNum;
 		newUser.noOfStayDays = faker.datatype.number();
 
 		newUser.gym = faker.datatype.boolean();
