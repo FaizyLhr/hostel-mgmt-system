@@ -10,7 +10,7 @@
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Email</th>
-        <th scope="col">Bed Num</th>
+        <th scope="col">Working Duration</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -20,13 +20,21 @@
         <td>{{ user?.firstName }}</td>
         <td>{{ user?.lastName }}</td>
         <td>{{ user?.email }}</td>
-        <td>{{ user?.allocatedBedNum }}</td>
+        <td>{{ user?.workingDuration }}</td>
         <td>
           <a
             class="btn btn-info"
             [routerLink]="['/home/get/report', user?.email]"
             >View Report</a
           >
+
+          <a
+            class="btn btn-outline-info"
+            [routerLink]="['/home/editStaff/', user?.email]"
+            >Edit</a
+          >
+
+          <a class="btn btn-outline-danger" (click)="delUser(user)">Delete</a>
 
           <!-- <a (click)="changeStatus(i)"><i class="fas fa-lock"></i></a> -->
         </td>

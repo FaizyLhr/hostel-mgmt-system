@@ -8,9 +8,10 @@ import { AddComponent } from './add/add.component';
 import { ServicesComponent } from './services/services.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { EditComponent } from './edit/edit.component';
+import { EditStaffComponent } from './edit-staff/edit-staff.component';
 
 @NgModule({
-  declarations: [HomeComponent, AddComponent, ServicesComponent, AddStaffComponent, EditComponent],
+  declarations: [HomeComponent, AddComponent, ServicesComponent, AddStaffComponent, EditComponent, EditStaffComponent],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
 })
 export class HomeModule {}

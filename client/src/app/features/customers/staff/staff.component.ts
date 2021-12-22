@@ -17,6 +17,20 @@ export class StaffComponent implements OnInit {
     this.getStaff();
   }
 
+  delUser(user: any) {
+    this.userService.deleteUser(user.email).subscribe(
+      (result) => {
+        console.log(result);
+        if (result.status === 200) {
+          this.getStaff();
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
   getStaff() {
     this.userService.getStaff().subscribe(
       (data) => {

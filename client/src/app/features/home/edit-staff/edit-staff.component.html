@@ -1,9 +1,8 @@
-<p>edit works!</p>
 <div class="container">
-  <p>add works!</p>
-  <form id="form-addCustomer" role="form" [formGroup]="editCustomerForm">
+  <p>edit-staff works!</p>
+  <form id="form-addCustomer" role="form" [formGroup]="editStaffForm">
     <!-- START Form Control-->
-    <h1 class="text-center">Edit Customers Form</h1>
+    <h1 class="text-center">Edit Staff Form</h1>
 
     <div class="form-group form-group-default">
       <div class="controls">
@@ -48,29 +47,29 @@
     </div>
 
     <div class="form-group form-group-default">
-      <label>No. Of Days for Stay</label>
+      <label>Job Description</label>
       <div class="controls">
-        <ng-select
-          [items]="noOfStayDaysOptions"
-          bindLabel="title"
-          bindValue="value"
-          formControlName="noOfStayDays"
-        >
-        </ng-select>
+        <input
+          type="text"
+          required
+          class="form-control"
+          name="jobDescription"
+          placeholder="Job Description"
+          formControlName="jobDescription"
+        />
       </div>
     </div>
 
     <div class="form-group form-group-default">
-      <label>allocatedBedNum</label>
+      <label>Working Duration</label>
       <div class="controls">
-        <input
-          required
-          type="number"
-          class="form-control"
-          name="allocatedBedNum"
-          placeholder="allocatedBedNum"
-          formControlName="allocatedBedNum"
-        />
+        <ng-select
+          [items]="workingDurationOptions"
+          bindLabel="title"
+          bindValue="value"
+          formControlName="workingDuration"
+        >
+        </ng-select>
       </div>
     </div>
 
@@ -81,7 +80,7 @@
           aria-label=""
           class="btn btn-primary btn-lg"
           type="submit"
-          [disabled]="editCustomerForm.invalid"
+          [disabled]="editStaffForm.invalid"
           (click)="onSubmit()"
         >
           Save

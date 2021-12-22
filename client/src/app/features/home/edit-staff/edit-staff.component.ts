@@ -1,54 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/core/services';
 
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css'],
+  selector: 'app-edit-staff',
+  templateUrl: './edit-staff.component.html',
+  styleUrls: ['./edit-staff.component.css'],
 })
-export class EditComponent implements OnInit {
-  editCustomerForm!: FormGroup;
+export class EditStaffComponent implements OnInit {
+  editStaffForm: any;
 
+  workingDurationOptions = [
+    {
+      title: '1-3 months',
+      value: 0,
+    },
+    {
+      title: '3-6 months',
+      value: 1,
+    },
+    {
+      title: '6-9 months',
+      value: 2,
+    },
+    {
+      title: 'above 12 months',
+      value: 3,
+    },
+  ];
   email: any;
   user: any;
 
   constructor(
-    private router: Router,
+    private formBuilder: FormBuilder,
     private userService: UserService,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  noOfStayDaysOptions = [
-    {
-      title: '1',
-      value: 1,
-    },
-    {
-      title: '2',
-      value: 2,
-    },
-    {
-      title: '3',
-      value: 3,
-    },
-    {
-      title: '4',
-      value: 4,
-    },
-  ];
-
   ngOnInit(): void {
-    this.editCustomerForm = this.formBuilder.group({
+    this.editStaffForm = this.formBuilder.group({
       email: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      noOfStayDays: 0,
-      allocatedBedNum: '',
+      workingDuration: 0,
+      jobDescription: '',
     });
 
     this.route.params.subscribe((params) => {
@@ -58,15 +57,13 @@ export class EditComponent implements OnInit {
     });
 
     this.getUser();
-
-    // this.update();
   }
 
   getUser() {
     this.userService.getUser(this.email).subscribe((result) => {
       // console.log('result', result);
       this.user = result.data;
-      this.editCustomerForm.patchValue(result.data);
+      this.editStaffForm.patchValue(result.data);
 
       // console.log(this.user);
     });
@@ -74,7 +71,7 @@ export class EditComponent implements OnInit {
 
   update() {
     this.userService
-      .update(this.editCustomerForm.value, this.email)
+      .update(this.editStaffForm.value, this.email)
       .subscribe((result) => {
         console.log('result', result);
         this.user = result.data;
@@ -82,10 +79,8 @@ export class EditComponent implements OnInit {
       });
   }
 
-  onSubmit(): void {
-    // console.log(this.editCustomerForm);
-
-    this.userService.update(this.editCustomerForm.value, this.email).subscribe(
+  onSubmit() {
+    this.userService.update(this.editStaffForm.value, this.email).subscribe(
       (result) => {
         console.log(result);
         Swal.fire({
@@ -95,8 +90,8 @@ export class EditComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.editCustomerForm.reset();
-        this.router.navigate(['/home/get/customer']);
+        this.editStaffForm.reset();
+        this.router.navigate(['/home/get/staff']);
       },
       (err) => {
         console.log(err);
