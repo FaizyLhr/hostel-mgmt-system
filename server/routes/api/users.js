@@ -13,8 +13,6 @@ const BedModel = require("../../models/Bed");
 
 const {
 	isAdmin,
-	isUnBlocked,
-	isBlocked,
 	isToken,
 } = require("../auth");
 
@@ -146,8 +144,6 @@ router.post("/addCustomer", isToken, isAdmin, (req, res, next) => {
 			return next(new BadRequestResponse(err))
 		})
 	}
-
-
 })
 
 
@@ -237,6 +233,7 @@ router.get("/home/get/staff", isToken, isAdmin, (req, res, next) => {
 		return next(new BadRequestResponse(e.error));
 	});
 });
+
 // View All customers
 router.get("/home/get/customer", isToken, isAdmin, (req, res, next) => {
 	// console.log("Inside");
@@ -299,8 +296,21 @@ router.put("/home/edit/:email", isToken, (req, res, next) => {
 		})
 		.then((updateUser) => {
 			// console.log(updateUser);
-			// console.log(req.body);
+			console.log(req.body);
 			// console.log(updateUser.role);
+			if (req.body.allocatedBedNum) {
+				BedModel.findOne({
+					bedNum: +req.emailUser.allocatedBedNum
+				}).then((userBed) => {
+					// console.log(userBed);
+					userBed.isFree = true;
+					userBed.allocatedTo = null;
+					req.userBed = userBed;
+				}).catch((e) => {
+					// console.log(e);
+					return next(new BadRequestResponse(e));
+				})
+			}
 			if (req.body.email) {
 				updateUser.email = req.body.email;
 			}
@@ -324,14 +334,38 @@ router.put("/home/edit/:email", isToken, (req, res, next) => {
 				// console.log(req.body.noOfStayDays);
 				if (req.body.allocatedBedNum) {
 					updateUser.allocatedBedNum = req.body.allocatedBedNum;
+
+					BedModel.findOne({
+						bedNum: +req.body.allocatedBedNum
+					}).then((bed) => {
+						console.log(bed);
+						if (!bed) {
+							return next(new BadRequestResponse("Bed Not Exist"));
+						}
+						if (bed.isFree === false) {
+							return next(new BadRequestResponse("Bed Already Reserved"));
+						}
+						bed.isFree = false;
+						bed.allocatedTo = updateUser._id;
+						bed.save((err, data) => {
+							if (err) return next(new BadRequestResponse(err));
+							console.log("Status Changed");
+						})
+						req.userBed.save((err, data) => {
+							if (err) return next(new BadRequestResponse(err));
+							console.log("Bed is Free");
+						})
+						// console.log(newUser);
+					}).catch((e) => {
+						// console.log(e);
+						return next(new BadRequestResponse(e));
+					})
 				}
 				if (req.body.noOfStayDays) {
 					updateUser.noOfStayDays = req.body.noOfStayDays;
 				}
 			}
-
 			// console.log(updateUser);
-
 			updateUser
 				.save()
 				.then((user) => {
