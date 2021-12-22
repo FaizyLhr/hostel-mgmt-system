@@ -23,18 +23,20 @@
         <td>{{ user?.workingDuration }}</td>
         <td>
           <a
-            class="btn btn-info"
+            class="btn btn-info m-1"
             [routerLink]="['/home/get/staffReport', user?.email]"
             >View Report</a
           >
 
           <a
-            class="btn btn-outline-info"
+            class="btn btn-outline-dark m-1"
             [routerLink]="['/home/editStaff/', user?.email]"
             >Edit</a
           >
 
-          <a class="btn btn-outline-danger" (click)="delUser(user)">Delete</a>
+          <a class="btn btn-outline-danger m-1" (click)="delUser(user)"
+            >Delete</a
+          >
 
           <!-- <a (click)="changeStatus(i)"><i class="fas fa-lock"></i></a> -->
         </td>

@@ -23,22 +23,24 @@
         <td>{{ user?.allocatedBedNum }}</td>
         <td>
           <a
-            class="btn btn-outline-dark"
+            class="btn btn-outline-dark m-1"
             [routerLink]="['/home/get/report', user?.email]"
             >View Report</a
           >
           <a
-            class="btn btn-outline-success"
+            class="btn btn-outline-success m-1"
             [routerLink]="['/home/addServices', user?.email]"
             >Add Service</a
           >
           <a
-            class="btn btn-outline-info"
+            class="btn btn-outline-info m-1"
             [routerLink]="['/home/edit/', user?.email]"
             >Edit</a
           >
 
-          <a class="btn btn-outline-danger" (click)="delUser(user)">Delete</a>
+          <a class="btn btn-outline-danger m-1" (click)="delUser(user)"
+            >Delete</a
+          >
           <!-- <a (click)="changeStatus(i)"><i class="fas fa-lock"></i></a> -->
         </td>
       </tr>
