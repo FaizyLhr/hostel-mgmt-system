@@ -49,7 +49,7 @@ async function seedUser() {
 		newUser.lastName = "customer";
 		newUser.noOfStayDays = 2;
 
-		newUser.setPassword("faizy");
+		newUser.setPassword("1234");
 
 		newUser.isEmailVerified = true;
 

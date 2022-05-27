@@ -10,10 +10,7 @@ const routes: Routes = [
   //   pathMatch: 'full',
   //   // component: LayoutComponent,
   // },
-  {
-    path: '',
-    component: LayoutComponent,
-  },
+  { path: '', component: LayoutComponent },
   {
     path: '',
     loadChildren: () =>

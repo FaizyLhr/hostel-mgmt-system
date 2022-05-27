@@ -2,29 +2,31 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 const slug = require("slug");
 // if (firstName || lastIndexOf() || firstName || lastIndexOf() || firstName || lastIndexOf() || firstName || lastIndexOf() || firstName || lastIndexOf() || firstName || lastIndexOf() || firstName || lastIndexOf() || firstName || lastIndexOf() || firstName || lastIndexOf() || firstName || lastIndexOf()) {}
-const BedSchema = new mongoose.Schema({
-	slug: {
-		type: String,
-		lowercase: true,
-		unique: true
+const BedSchema = new mongoose.Schema(
+	{
+		slug: {
+			type: String,
+			lowercase: true,
+			unique: true,
+		},
+		bedNum: {
+			unique: true,
+			type: Number,
+			default: 0,
+		},
+		isFree: {
+			type: Boolean,
+			default: true,
+		},
+		allocatedTo: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			default: null,
+		},
 	},
-	bedNum: {
-		unique: true,
-		type: Number,
-		default: 0
-	},
-	isFree: {
-		type: Boolean,
-		default: true
-	},
-	allocatedTo: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "User",
-		default: null,
-	},
-}, {
-	timestamps: true
-});
+	{ timestamps: true }
+);
+
 BedSchema.plugin(mongoosePaginate);
 
 BedSchema.pre("validate", function (next) {

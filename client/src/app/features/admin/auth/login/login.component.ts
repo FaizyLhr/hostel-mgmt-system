@@ -3,19 +3,21 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
-  loginForm !: FormGroup;
+  loginForm!: FormGroup;
   hasErrors = false;
   errorMessage!: string;
 
-  constructor(private formBuilder:FormBuilder,private userService: UserService,private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -24,24 +26,19 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     this.userService.attemptAuth('login', this.loginForm.value).subscribe(
-      data => {
+      (data) => {
         // console.log(data);
-        
-        if(data.data.role === 1)
-          this.router.navigate(['/home']);
-        else
-          this.router.navigate(['/login']);
+
+        if (data.data.role === 1) this.router.navigate(['/home']);
+        else this.router.navigate(['/login']);
       },
-      err => {
+      (err) => {
         this.hasErrors = true;
-        if(err.code === 423)
-          this.errorMessage = 'User is not active by admin';
-        else
-          this.errorMessage = 'Invalid credentials';
+        if (err.code === 423) this.errorMessage = 'User is not active by admin';
+        else this.errorMessage = 'Invalid credentials';
       }
     );
   }
-
 }
